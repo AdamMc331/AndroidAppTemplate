@@ -1,0 +1,29 @@
+// https://blog.sebastiano.dev/ooga-chaka-git-hooks-to-enforce-code-quality/
+static def isLinuxOrMacOs() {
+    def osName = System.getProperty('os.name').toLowerCase(Locale.ROOT)
+    return osName.contains('linux') || osName.contains('mac os') || osName.contains('macos')
+}
+
+task copyGitHooks(type: Copy) {
+    description 'Copies the git hooks from /git-hooks to the .git folder.'
+    group 'git hooks'
+    from("${rootDir}/git-hooks/") {
+        include '**/*.sh'
+        rename '(.*).sh', '$1'
+    }
+    into "${rootDir}/.git/hooks"
+    onlyIf { isLinuxOrMacOs() }
+}
+
+task installGitHooks(type: Exec) {
+    description 'Installs the pre-commit git hooks from /git-hooks.'
+    group 'git hooks'
+    workingDir rootDir
+    commandLine 'chmod'
+    args '-R', '+x', '.git/hooks/'
+    dependsOn copyGitHooks
+    onlyIf { isLinuxOrMacOs() }
+    doLast {
+        logger.info('Git hook installed successfully.')
+    }
+}
