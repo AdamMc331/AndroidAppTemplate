@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlinVersion = "1.5.30"
+    ext.kotlinVersion = "1.5.31"
 
     // https://github.com/JLLeitschuh/ktlint-gradle/releases
     ext.ktlintPluginVersion = "10.0.0"
