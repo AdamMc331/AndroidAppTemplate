@@ -12,13 +12,16 @@ https://youtu.be/E0iMUWJn76E
 
 To use this template in your own project, click the "Use this template" button at the top right of the repository. Once you do, a repository will be created for your account that you can clone and use on your device.
 
-Do note that once you do so, you'll need to update anywhere `AndroidAppTemplate` is referenced. This includes, but might not be limited to:
+Do note that once you do so, you'll need to update anywhere `TODOREPLACE` is referenced. This 
+includes, but might not be limited to:
 
-* Project packages.
+* build.gradle for app module.
 * AndroidManifest file.
 * Strings.xml (for app_name string). 
 
-There is an open issue to [automate](https://github.com/AdamMc331/AndroidAppTemplate/issues/1) this process.
+There is an open issue to [automate](https://github.com/AdamMc331/AndroidAppTemplate/issues/1) 
+this process. It is not currently automated, but we have modified to limit the number of changes 
+and made it easily searchable with `TODOREPLACE`. 
 
 ## What's Included
 
