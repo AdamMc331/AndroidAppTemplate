@@ -30,7 +30,14 @@ The dependencies in the template include:
 * [Detekt](/documentation/StaticAnalysis.md) for code smells.
 * [Git Hooks](/documentation/GitHooks.md) for automatically perform static analysis checks. 
 * [Gradle Versions Plugin](/documentation/VersionsPlugin.md) for checking all dependencies for new versions.
-* [GitHub Actions](/documentation/GitHubActions.md) for running continuous integration and ensuring code quality with every PR. 
+* [GitHub Actions](/documentation/GitHubActions.md) for running continuous integration and ensuring code quality with every PR.
+
+### Danger
+
+This template uses [Danger](https://danger.systems) which will perform some checks against our 
+pull requests. You can find the list of checks in the [Dangerfile](Dangerfile). In addition, we 
+have a GitHub Actions workflow for Danger checks. In order for that to work, you'll need a 
+Danger API key setup in your GitHub secrets. Info on this can be found [here](https://www.jessesquires.com/blog/2020/04/10/running-danger-on-github-actions/). 
 
 ### Templates
 
