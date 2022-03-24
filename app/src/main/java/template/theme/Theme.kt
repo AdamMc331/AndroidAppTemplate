@@ -1,4 +1,4 @@
-package com.template.theme
+package template.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

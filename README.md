@@ -12,16 +12,11 @@ https://youtu.be/E0iMUWJn76E
 
 To use this template in your own project, click the "Use this template" button at the top right of the repository. Once you do, a repository will be created for your account that you can clone and use on your device.
 
-Do note that once you do so, you'll need to update anywhere `TODOREPLACE` is referenced. This 
-includes, but might not be limited to:
+To setup this repository to your needs, open the [setup.gradle](buildscripts/setup.gradle) file 
+and tweak the `renameConfig` block to your needs. After that, you can run the `renameTemplate` 
+gradle task to have the app module's package name and relevant strings replaced.
 
-* build.gradle for app module.
-* AndroidManifest file.
-* Strings.xml (for app_name string). 
-
-There is an open issue to [automate](https://github.com/AdamMc331/AndroidAppTemplate/issues/1) 
-this process. It is not currently automated, but we have modified to limit the number of changes 
-and made it easily searchable with `TODOREPLACE`. 
+Once you've done this, feel free to delete that `setup.gradle` file from your project.
 
 ## What's Included
 

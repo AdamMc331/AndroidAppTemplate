@@ -1,0 +1,115 @@
+def renameConfig = [
+        templateName: "template",
+        newPackage     : "domain.yourname.app",
+        newProjectName : "Your Project",
+]
+
+task renameAppPackage(type: Copy) {
+    description "Renames the template package in the app module."
+    group null
+
+    def newPackageAsDirectory = renameConfig.newPackage.replaceAll("\\.", "/")
+    def startingDirectory = "${rootDir}/app/src/main/java/${renameConfig.templateName}"
+    def endingDirectory = "${rootDir}/app/src/main/java/${newPackageAsDirectory}"
+
+    from(startingDirectory)
+    into(endingDirectory)
+
+    // Replace package statements
+    filter { line ->
+        line.replaceAll(
+                "package ${renameConfig.templateName}",
+                "package ${renameConfig.newPackage}"
+        )
+    }
+
+    // Replace import statements
+    filter { line ->
+        line.replaceAll(
+                "import ${renameConfig.templateName}",
+                "import ${renameConfig.newPackage}"
+        )
+    }
+
+    doLast {
+        delete(startingDirectory)
+
+        ("git add $endingDirectory").execute()
+    }
+}
+
+task replacePackageInManifest {
+    description "Replaces references to template in AndroidManifest.xml file."
+    group null
+
+    doLast {
+        def file = new File("${rootDir}/app/src/main/AndroidManifest.xml")
+
+        // Replace package
+        file.text = file.text.replaceAll(
+                "package=\"com.${renameConfig.templateName}\"",
+                "package=\"${renameConfig.newPackage}\"",
+        )
+
+        // Replace MainActivity reference
+        file.text = file.text.replaceAll(
+                "${renameConfig.templateName}.MainActivity",
+                "${renameConfig.newPackage}.MainActivity",
+        )
+    }
+}
+
+task replaceApplicationId {
+    description "Replaces application ID in app/build.gradle file."
+    group null
+
+    doLast {
+        def file = new File("${rootDir}/app/build.gradle")
+
+        file.text = file.text.replaceAll(
+                "applicationId \"${renameConfig.templateName}\"",
+                "applicationId \"${renameConfig.newPackage}\"",
+        )
+    }
+}
+
+task replaceProjectName {
+    description "Replaces project name in settings.gradle file."
+    group null
+
+    doLast {
+        def file = new File("${rootDir}/settings.gradle")
+
+        file.text = file.text.replaceAll(
+                "rootProject.name = \"${renameConfig.templateName}\"",
+                "rootProject.name = \"${renameConfig.newProjectName}\"",
+        )
+    }
+}
+
+task replaceAppName {
+    description "Replaces app name in strings.xml file."
+    group null
+
+    doLast {
+        def file = new File("${rootDir}/app/src/main/res/values/strings.xml")
+
+        file.text = file.text.replaceAll(
+                "<string name=\"app_name\">${renameConfig.templateName}</string>",
+                "<string name=\"app_name\">${renameConfig.newProjectName}</string>",
+        )
+    }
+}
+
+task renameTemplate {
+    description "Runs all of the necessary template setup tasks based on the renameConfig."
+    group "Template Setup"
+
+    dependsOn(
+            renameAppPackage,
+            replacePackageInManifest,
+            replaceApplicationId,
+            replaceProjectName,
+            replaceAppName,
+    )
+}
