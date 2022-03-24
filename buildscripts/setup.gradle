@@ -25,6 +25,8 @@ task renameAppPackage(type: Copy) {
 
     doLast {
         delete(startingDirectory)
+
+        ("git add $endingDirectory").execute()
     }
 }
 
