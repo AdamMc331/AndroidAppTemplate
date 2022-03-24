@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.template">
+    package="template">
 
     <application
         android:allowBackup="true"
@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppTheme">
+
         <activity
-            android:name=".MainActivity"
+            android:name="template.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppTheme.NoActionBar">
