@@ -26,3 +26,22 @@ task renameAppPackage(type: Copy) {
         delete(startingDirectory)
     }
 }
+
+task replacePackageInManifest {
+    description "Replaces references to template in AndroidManifest.xml file."
+    group "Template Setup"
+
+    def file = new File("${rootDir}/app/src/main/AndroidManifest.xml")
+
+    // Replace package
+    file.text = file.text.replaceAll(
+            "package=\"${renameConfig.templatePackage}\"",
+            "package=\"${renameConfig.newPackage}\"",
+    )
+
+    // Replace MainActivity reference
+    file.text = file.text.replaceAll(
+            "${renameConfig.templatePackage}.MainActivity",
+            "${renameConfig.newPackage}.MainActivity",
+    )
+}
