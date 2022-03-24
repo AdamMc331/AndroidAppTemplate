@@ -15,11 +15,19 @@ task renameAppPackage(type: Copy) {
     from(startingDirectory)
     into(endingDirectory)
 
-    // Replace import statements
+    // Replace package statements
     filter { line ->
         line.replaceAll(
                 "package ${renameConfig.templateName}",
                 "package ${renameConfig.newPackage}"
+        )
+    }
+
+    // Replace import statements
+    filter { line ->
+        line.replaceAll(
+                "import ${renameConfig.templateName}",
+                "import ${renameConfig.newPackage}"
         )
     }
 
