@@ -39,7 +39,7 @@ task replacePackageInManifest {
 
         // Replace package
         file.text = file.text.replaceAll(
-                "package=\"${renameConfig.templateName}\"",
+                "package=\"com.${renameConfig.templateName}\"",
                 "package=\"${renameConfig.newPackage}\"",
         )
 
