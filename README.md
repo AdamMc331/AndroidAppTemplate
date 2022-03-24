@@ -16,9 +16,6 @@ To setup this repository to your needs, open the [setup.gradle](buildscripts/set
 and tweak the `renameConfig` block to your needs. After that, you can run the `renameTemplate` 
 gradle task to have the app module's package name and relevant strings replaced.
 
-Note that the new files inside the app module are not added to git automatically, so you'll need 
-to do that for them to be committed to the repository.
-
 Once you've done this, feel free to delete that `setup.gradle` file from your project.
 
 ## What's Included
