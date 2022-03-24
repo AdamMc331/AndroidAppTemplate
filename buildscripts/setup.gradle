@@ -1,0 +1,17 @@
+task renameAppPackage(type: Copy) {
+    description "Renames the template package in the app module."
+    group "Template Setup"
+
+    def templatePackage = "template"
+    def newPackage = "domain.yourname.app"
+
+    def newPackageAsDirectory = newPackage.replaceAll("\\.", "/")
+
+    from("${rootDir}/app/src/main/java/${templatePackage}")
+
+    into("${rootDir}/app/src/main/java/${newPackageAsDirectory}")
+
+    filter { line ->
+        line.replaceAll("package $templatePackage", "package $newPackage")
+    }
+}
