@@ -16,7 +16,11 @@ To setup this repository to your needs, open the [setup.gradle](buildscripts/set
 and tweak the `renameConfig` block to your needs. After that, you can run the `renameTemplate` 
 gradle task to have the app module's package name and relevant strings replaced.
 
-Once you've done this, feel free to delete that `setup.gradle` file from your project.
+### Cleanup
+
+Once you've done this, feel free to delete that [setup.gradle](buildscripts/setup.gradle) file from your project. In 
+addition, you can remove the [template_change_test](.github/workflows/template_change_test.yml) 
+workflow which validates the above process for the template repo itself.
 
 ## What's Included
 

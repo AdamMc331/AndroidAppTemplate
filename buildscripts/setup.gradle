@@ -1,7 +1,8 @@
 def renameConfig = [
-        templateName: "template",
-        newPackage     : "domain.yourname.app",
-        newProjectName : "Your Project",
+        templateName  : "template",
+        templateAppId : "template.app.id",
+        newPackage    : "domain.yourname.app",
+        newProjectName: "Your Project",
 ]
 
 task renameAppPackage(type: Copy) {
@@ -47,7 +48,7 @@ task replacePackageInManifest {
 
         // Replace package
         file.text = file.text.replaceAll(
-                "package=\"com.${renameConfig.templateName}\"",
+                "package=\"${renameConfig.templateName}\"",
                 "package=\"${renameConfig.newPackage}\"",
         )
 
@@ -67,7 +68,7 @@ task replaceApplicationId {
         def file = new File("${rootDir}/app/build.gradle")
 
         file.text = file.text.replaceAll(
-                "applicationId \"${renameConfig.templateName}\"",
+                "applicationId \"${renameConfig.templateAppId}\"",
                 "applicationId \"${renameConfig.newPackage}\"",
         )
     }
