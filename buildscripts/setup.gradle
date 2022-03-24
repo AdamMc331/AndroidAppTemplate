@@ -82,7 +82,7 @@ task replaceAppName {
     group null
 
     doLast {
-        def file = new File("${rootDir}/app/src/main/res/strings.xml")
+        def file = new File("${rootDir}/app/src/main/res/values/strings.xml")
 
         file.text = file.text.replaceAll(
                 "<string name=\"app_name\">${renameConfig.templateName}</string>",
