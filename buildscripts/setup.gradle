@@ -8,11 +8,13 @@ task renameAppPackage(type: Copy) {
     group "Template Setup"
 
     def newPackageAsDirectory = renameConfig.newPackage.replaceAll("\\.", "/")
+    def startingDirectory = "${rootDir}/app/src/main/java/${renameConfig.templatePackage}"
+    def endingDirectory = "${rootDir}/app/src/main/java/${newPackageAsDirectory}"
 
-    from("${rootDir}/app/src/main/java/${renameConfig.templatePackage}")
+    from(startingDirectory)
+    into(endingDirectory)
 
-    into("${rootDir}/app/src/main/java/${newPackageAsDirectory}")
-
+    // Replace import statements
     filter { line ->
         line.replaceAll(
                 "package ${renameConfig.templatePackage}",
@@ -20,5 +22,7 @@ task renameAppPackage(type: Copy) {
         )
     }
 
-    delete("${rootDir}/app/src/main/java/${renameConfig.templatePackage}")
+    doLast {
+        delete(startingDirectory)
+    }
 }
