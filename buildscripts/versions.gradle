@@ -1,15 +1,15 @@
 ext {
     versions = [
             // https://developer.android.com/jetpack/androidx/releases/core
-            ktxCore        : "1.7.0",
+            ktxCore        : "1.9.0",
             // https://developer.android.com/jetpack/androidx/releases/appcompat
-            appCompat      : "1.4.1",
+            appCompat      : "1.5.1",
             // https://developer.android.com/jetpack/androidx/releases/compose
-            compose        : "1.1.1",
+            compose        : "1.2.1",
             // https://developer.android.com/jetpack/androidx/releases/lifecycle
-            lifecycle      : "2.4.1",
+            lifecycle      : "2.5.1",
             // https://developer.android.com/jetpack/androidx/releases/activity
-            activityCompose: "1.4.0",
+            activityCompose: "1.5.1",
             // https://github.com/junit-team/junit4/releases
             junit          : "4.13.2",
             // https://developer.android.com/jetpack/androidx/releases/test
@@ -17,6 +17,6 @@ ext {
             // https://developer.android.com/jetpack/androidx/releases/test
             espresso       : "3.4.0",
             // https://github.com/material-components/material-components-android/releases
-            material       : "1.5.0",
+            material       : "1.6.1",
     ]
 }
