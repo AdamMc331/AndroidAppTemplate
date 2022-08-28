@@ -3,7 +3,7 @@ buildscript {
     ext.kotlinVersion = "1.7.10"
 
     // https://github.com/JLLeitschuh/ktlint-gradle/releases
-    ext.ktlintPluginVersion = "10.0.0"
+    ext.ktlintPluginVersion = "11.0.0"
 
     // https://github.com/detekt/detekt/releases
     ext.detektVersion = "1.17.0"
