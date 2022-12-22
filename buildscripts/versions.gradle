@@ -5,11 +5,11 @@ ext {
             // https://developer.android.com/jetpack/androidx/releases/appcompat
             appCompat      : "1.5.1",
             // https://developer.android.com/jetpack/androidx/releases/compose
-            compose        : "1.2.1",
+            compose        : "2022.10.00",
             // https://developer.android.com/jetpack/androidx/releases/lifecycle
             lifecycle      : "2.5.1",
             // https://developer.android.com/jetpack/androidx/releases/activity
-            activityCompose: "1.5.1",
+            activityCompose: "1.6.1",
             // https://github.com/junit-team/junit4/releases
             junit          : "4.13.2",
             // https://developer.android.com/jetpack/androidx/releases/test
