@@ -5,7 +5,7 @@ ext {
             // https://developer.android.com/jetpack/androidx/releases/appcompat
             appCompat      : "1.5.1",
             // https://developer.android.com/jetpack/androidx/releases/compose
-            compose        : "2022.10.00",
+            compose        : "2022.12.00",
             // https://developer.android.com/jetpack/androidx/releases/lifecycle
             lifecycle      : "2.5.1",
             // https://developer.android.com/jetpack/androidx/releases/activity
