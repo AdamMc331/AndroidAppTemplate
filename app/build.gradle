@@ -58,6 +58,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.ext.versions.lifecycle"
     implementation "androidx.activity:activity-compose:$rootProject.ext.versions.activityCompose"
     testImplementation "junit:junit:$rootProject.ext.versions.junit"
+    androidTestImplementation platform("androidx.compose:compose-bom:$rootProject.ext.versions.compose")
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.versions.androidxTest"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.versions.espresso"
     androidTestImplementation "androidx.compose.ui:ui-test-junit4"
