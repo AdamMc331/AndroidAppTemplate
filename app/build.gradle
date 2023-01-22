@@ -47,20 +47,25 @@ android {
 }
 
 dependencies {
+    def composeBom = platform(libs.compose.bom)
+    implementation(composeBom)
+    debugImplementation(composeBom)
+    androidTestImplementation(composeBom)
 
-    implementation "androidx.core:core-ktx:$rootProject.ext.versions.ktxCore"
-    implementation "androidx.appcompat:appcompat:$rootProject.ext.versions.appCompat"
-    implementation "com.google.android.material:material:$rootProject.ext.versions.material"
-    implementation platform("androidx.compose:compose-bom:$rootProject.ext.versions.compose")
-    implementation "androidx.compose.ui:ui"
-    implementation "androidx.compose.material:material"
-    implementation "androidx.compose.ui:ui-tooling-preview"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.ext.versions.lifecycle"
-    implementation "androidx.activity:activity-compose:$rootProject.ext.versions.activityCompose"
-    testImplementation "junit:junit:$rootProject.ext.versions.junit"
-    androidTestImplementation platform("androidx.compose:compose-bom:$rootProject.ext.versions.compose")
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.versions.androidxTest"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.versions.espresso"
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4"
-    debugImplementation "androidx.compose.ui:ui-tooling"
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.android.material)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material)
+    implementation(libs.compose.ui.tooling)
+
+    testImplementation(libs.junit)
+
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.compose.ui.test.junit)
+
+    debugImplementation(libs.compose.ui.tooling)
 }
