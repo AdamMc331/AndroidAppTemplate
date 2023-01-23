@@ -61,11 +61,11 @@ task replacePackageInManifest {
 }
 
 task replaceApplicationId {
-    description "Replaces application ID in app/build.gradle file."
+    description "Replaces application ID in app/build.gradle.kts file."
     group null
 
     doLast {
-        def file = new File("${rootDir}/app/build.gradle.kts")
+        def file = new File("${rootDir}/app/build.gradle.kts.kts")
 
         file.text = file.text.replaceAll(
                 "applicationId = \"${renameConfig.templateAppId}\"",
