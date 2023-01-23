@@ -65,7 +65,7 @@ task replaceApplicationId {
     group null
 
     doLast {
-        def file = new File("${rootDir}/app/build.gradle.kts.kts")
+        def file = new File("${rootDir}/app/build.gradle.kts")
 
         file.text = file.text.replaceAll(
                 "applicationId = \"${renameConfig.templateAppId}\"",
