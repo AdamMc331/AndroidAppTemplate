@@ -1,5 +1,6 @@
 package template.theme
 
+import android.annotation.TargetApi
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -21,6 +22,7 @@ private val lightColorScheme = lightColorScheme(
 )
 
 @Composable
+@TargetApi(31)
 fun TemplateTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicTheme: Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S,
