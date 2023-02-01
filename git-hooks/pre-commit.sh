@@ -12,7 +12,7 @@ fi;
 echo "Running ktlint over these files:"
 echo "$CHANGED_FILES"
 
-./gradlew --quiet ktlintFormat -PinternalKtlintGitFilter="$CHANGED_FILES"
+./gradlew --quiet formatKotlin -PinternalKtlintGitFilter="$CHANGED_FILES"
 
 echo "Completed ktlint run."
 
