@@ -2,5 +2,5 @@
 
 echo "Running static analysis."
 
-./gradlew ktlintCheck
+./gradlew lintKotlin
 ./gradlew detekt

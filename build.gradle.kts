@@ -3,9 +3,6 @@ buildscript {
     extra.apply {
         set("kotlinVersion", "1.7.10")
 
-        // https://github.com/JLLeitschuh/ktlint-gradle/releases
-        set("ktlintPluginVersion", "11.0.0")
-
         // https://github.com/detekt/detekt/releases
         set("detektVersion", "1.21.0")
 
@@ -22,7 +19,6 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:7.2.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${rootProject.extra.get("kotlinVersion")}")
-        classpath("org.jlleitschuh.gradle:ktlint-gradle:${rootProject.extra.get("ktlintPluginVersion")}")
         classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${rootProject.extra.get("detektVersion")}")
         classpath("com.github.ben-manes:gradle-versions-plugin:${rootProject.extra.get("versionsPluginVersion")}")
 
@@ -31,11 +27,15 @@ buildscript {
     }
 }
 
+plugins {
+    // https://github.com/jeremymailen/kotlinter-gradle/releases
+    id("org.jmailen.kotlinter") version "3.13.0" apply false
+}
+
 apply(from = "buildscripts/githooks.gradle")
 apply(from = "buildscripts/setup.gradle")
 
 subprojects {
-    apply(from = "../buildscripts/ktlint.gradle")
     apply(from = "../buildscripts/detekt.gradle")
     apply(from = "../buildscripts/versionsplugin.gradle")
 }

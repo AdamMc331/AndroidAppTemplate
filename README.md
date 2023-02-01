@@ -51,7 +51,6 @@ You may notice that dependencies are set up in a very specific way. Each of the 
 
 ```groovy
 subprojects {
-    apply from: "../buildscripts/ktlint.gradle"
     apply from: "../buildscripts/detekt.gradle"
     apply from: "../buildscripts/versionsplugin.gradle"
 }
