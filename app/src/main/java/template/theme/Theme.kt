@@ -13,12 +13,12 @@ import androidx.compose.ui.platform.LocalContext
 
 private val darkColorScheme = darkColorScheme(
     primary = Purple200,
-    secondary = Teal200
+    secondary = Teal200,
 )
 
 private val lightColorScheme = lightColorScheme(
     primary = Purple500,
-    secondary = Teal200
+    secondary = Teal200,
 )
 
 @Composable
@@ -26,7 +26,7 @@ private val lightColorScheme = lightColorScheme(
 fun TemplateTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicTheme: Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = when {
         dynamicTheme && darkTheme -> dynamicDarkColorScheme(LocalContext.current)
@@ -39,6 +39,6 @@ fun TemplateTheme(
         colorScheme = colorScheme,
         typography = Typography,
         shapes = Shapes,
-        content = content
+        content = content,
     )
 }
