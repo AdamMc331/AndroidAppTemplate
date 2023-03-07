@@ -57,13 +57,14 @@ dependencies {
     debugImplementation(composeBom)
     androidTestImplementation(composeBom)
 
+    implementation(project(":adaptive-navigation"))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.android.material)
     implementation(libs.compose.ui)
-    implementation(libs.compose.material)
+    implementation(libs.compose.material3)
     implementation(libs.compose.ui.tooling)
 
     testImplementation(libs.junit)

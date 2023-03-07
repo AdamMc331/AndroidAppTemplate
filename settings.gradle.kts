@@ -6,4 +6,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "template"
+
+include(":adaptive-navigation")
 include(":app")
