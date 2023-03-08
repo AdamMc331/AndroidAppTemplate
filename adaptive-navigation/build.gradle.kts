@@ -54,5 +54,8 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
 
+    androidTestImplementation(libs.compose.ui.test.junit)
+    androidTestImplementation(libs.compose.ui.test.manifest)
+
     debugImplementation(libs.compose.ui.tooling)
 }

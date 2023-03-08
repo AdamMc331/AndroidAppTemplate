@@ -9,6 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 
+/**
+ * Renders a [NavigationBar] component that shows a collection of [tabs] which the user
+ * can use to navigate to a different screen. Tab clicks are handled using the [onTabClicked] callback.
+ */
 @Composable
 fun BottomNavigation(
     tabs: List<NavigationTab>,
