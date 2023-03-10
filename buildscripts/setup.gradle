@@ -88,17 +88,22 @@ task deleteMviModule {
         delete("${rootDir}/mvi")
 
         def settingsFile = new File("${rootDir}/settings.gradle.kts")
-
-        settingsFile.text = settingsFile.text.replaceAll(
-                "include\\(\":mvi\"\\)",
-                "",
-        )
+        List settingsLines = settingsFile.readLines()
+        settingsFile.text = ""
+        settingsLines.each { line ->
+            if (!line.contains("include\\(\":mvi\"\\)")) {
+                settingsFile.append(line) + "\n"
+            }
+        }
 
         def appGradleFile = new File("${rootDir}/app/build.gradle.kts")
-        appGradleFile.text = appGradleFile.text.replaceAll(
-                "implementation\\(project\\(\":mvi\"\\)\\)",
-                "",
-        )
+        List appGradleLines = settingsFile.readLines()
+        appGradleFile.text = ""
+        appGradleLines.each { line ->
+            if (!line.contains("implementation\\(project\\(\":mvi\"\\)\\)")) {
+                appGradleFile.append(line) + "\n"
+            }
+        }
     }
 }
 
