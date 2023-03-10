@@ -4,6 +4,7 @@ androidxTest = "1.1.5"
 appCompat = "1.6.0"
 composeBom = "2023.01.00"
 compileSdk = "33"
+coroutines = "1.6.4"
 espresso = "3.5.1"
 junit = "4.13.2"
 ktxCore = "1.9.0"
@@ -29,3 +30,4 @@ compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
 junit = { module = "junit:junit", version.ref = "junit" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
