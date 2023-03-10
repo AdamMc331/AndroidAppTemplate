@@ -12,5 +12,5 @@ interface Reducer<S : State, A : Action> {
     /**
      * @see [Reducer]
      */
-    fun reduce(action: A, currentState: S): S
+    fun reduce(currentState: S, action: A): S
 }
