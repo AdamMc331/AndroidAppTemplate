@@ -22,7 +22,7 @@ class Store<S : State, A : Action>(
 
     fun dispatch(action: A) {
         _state.update { currentState ->
-            reducer.reduce(action, currentState)
+            reducer.reduce(currentState, action)
         }
     }
 }
