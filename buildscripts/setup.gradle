@@ -1,8 +1,17 @@
+// Adding for MVI module
+// 1. If user doesn't want it
+//   - Delete entire module folder
+//   - Remove from settings.gradle file
+// 2. If user wants it
+//   - Rename package. Rename to [userInput].mvi
+//   - Apply dependency to `app` module.
+
 def renameConfig = [
         templateName  : "template",
         templateAppId : "template.app.id",
         newPackage    : "domain.yourname.app",
         newProjectName: "Your Project",
+        useMviModule  : false,
 ]
 
 task renameAppPackage(type: Copy) {
@@ -13,22 +22,25 @@ task renameAppPackage(type: Copy) {
     def startingDirectory = "${rootDir}/app/src/main/java/${renameConfig.templateName}"
     def endingDirectory = "${rootDir}/app/src/main/java/${newPackageAsDirectory}"
 
+    def startingPackage = renameConfig.templateName
+    def endingPackage = renameConfig.newPackage
+
     from(startingDirectory)
     into(endingDirectory)
 
     // Replace package statements
     filter { line ->
         line.replaceAll(
-                "package ${renameConfig.templateName}",
-                "package ${renameConfig.newPackage}"
+                "package ${startingPackage}",
+                "package ${endingPackage}"
         )
     }
 
     // Replace import statements
     filter { line ->
         line.replaceAll(
-                "import ${renameConfig.templateName}",
-                "import ${renameConfig.newPackage}"
+                "import ${startingPackage}",
+                "import ${endingPackage}"
         )
     }
 
@@ -36,6 +48,57 @@ task renameAppPackage(type: Copy) {
         delete(startingDirectory)
 
         ("git add $endingDirectory").execute()
+    }
+}
+
+task renameMviPackage(type: Copy) {
+    description "Renames the template package in the mvi module."
+    group null
+
+    def newPackageAsDirectory = renameConfig.newPackage.replaceAll("\\.", "/")
+    def startingDirectory = "${rootDir}/mvi/src/main/java/${renameConfig.templateName}/mvi"
+    def endingDirectory = "${rootDir}/mvi/src/main/java/${newPackageAsDirectory}/mvi"
+
+    def startingPackage = "${renameConfig.templateName}.mvi"
+    def endingPackage = "${renameConfig.newPackage}.mvi"
+
+    from(startingDirectory)
+    into(endingDirectory)
+
+    // Replace package statements
+    filter { line ->
+        line.replaceAll(
+                "package $startingPackage",
+                "package $endingPackage"
+        )
+    }
+
+    // Replace import statements
+    filter { line ->
+        line.replaceAll(
+                "import $startingPackage",
+                "import $endingPackage"
+        )
+    }
+
+    doLast {
+        delete("${rootDir}/mvi/src/main/java/${renameConfig.templateName}")
+
+        ("git add $endingDirectory").execute()
+    }
+}
+
+task deleteMviModule {
+    doLast {
+        delete("${rootDir}/mvi")
+    }
+}
+
+task renameOrRemoveMviModule {
+    if (renameConfig.useMviModule) {
+        dependsOn(renameMviPackage)
+    } else {
+        dependsOn(deleteMviModule)
     }
 }
 
