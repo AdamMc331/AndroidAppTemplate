@@ -7,3 +7,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "template"
 include(":app")
+include(":mvi")
