@@ -1,17 +1,9 @@
-// Adding for MVI module
-// 1. If user doesn't want it
-//   - Delete entire module folder
-//   - Remove from settings.gradle file
-// 2. If user wants it
-//   - Rename package. Rename to [userInput].mvi
-//   - Apply dependency to `app` module.
-
 def renameConfig = [
         templateName  : "template",
         templateAppId : "template.app.id",
         newPackage    : "domain.yourname.app",
         newProjectName: "Your Project",
-        useMviModule  : false,
+        useMviModule  : true,
 ]
 
 task renameAppPackage(type: Copy) {
@@ -89,8 +81,24 @@ task renameMviPackage(type: Copy) {
 }
 
 task deleteMviModule {
+    description "Deletes MVI module and removes from settings.gradle.kts"
+    group null
+
     doLast {
         delete("${rootDir}/mvi")
+
+        def settingsFile = new File("${rootDir}/settings.gradle.kts")
+
+        settingsFile.text = settingsFile.text.replaceAll(
+                "include\\(\":mvi\"\\)",
+                "",
+        )
+
+        def appGradleFile = new File("${rootDir}/app/build.gradle.kts")
+        appGradleFile.text = appGradleFile.text.replaceAll(
+                "implementation\\(project\\(\":mvi\"\\)\\)",
+                "",
+        )
     }
 }
 
@@ -175,5 +183,6 @@ task renameTemplate {
             replaceApplicationId,
             replaceProjectName,
             replaceAppName,
+            renameOrRemoveMviModule,
     )
 }

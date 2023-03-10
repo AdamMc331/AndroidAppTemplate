@@ -57,6 +57,7 @@ dependencies {
     debugImplementation(composeBom)
     androidTestImplementation(composeBom)
 
+    implementation(project(":mvi"))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
