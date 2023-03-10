@@ -91,7 +91,7 @@ task deleteMviModule {
         List settingsLines = settingsFile.readLines()
         settingsFile.text = ""
         settingsLines.each { line ->
-            if (!line.contains("include\\(\":mvi\"\\)")) {
+            if (!line.contains("include(\":mvi\")")) {
                 settingsFile.append(line)
                 settingsFile.append("\n")
             }
@@ -101,7 +101,7 @@ task deleteMviModule {
         List appGradleLines = appGradleFile.readLines()
         appGradleFile.text = ""
         appGradleLines.each { line ->
-            if (!line.contains("implementation\\(project\\(\":mvi\"\\)\\)")) {
+            if (!line.contains("implementation(project(\":mvi\"))")) {
                 appGradleFile.append(line)
                 appGradleFile.append("\n")
             }
