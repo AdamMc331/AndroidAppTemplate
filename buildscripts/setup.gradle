@@ -92,7 +92,8 @@ task deleteMviModule {
         settingsFile.text = ""
         settingsLines.each { line ->
             if (!line.contains("include\\(\":mvi\"\\)")) {
-                settingsFile.append(line) + "\n"
+                settingsFile.append(line)
+                settingsFile.append("\n")
             }
         }
 
@@ -101,7 +102,8 @@ task deleteMviModule {
         appGradleFile.text = ""
         appGradleLines.each { line ->
             if (!line.contains("implementation\\(project\\(\":mvi\"\\)\\)")) {
-                appGradleFile.append(line) + "\n"
+                appGradleFile.append(line)
+                appGradleFile.append("\n")
             }
         }
     }
