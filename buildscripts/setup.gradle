@@ -98,7 +98,7 @@ task deleteMviModule {
         }
 
         def appGradleFile = new File("${rootDir}/app/build.gradle.kts")
-        List appGradleLines = settingsFile.readLines()
+        List appGradleLines = appGradle.readLines()
         appGradleFile.text = ""
         appGradleLines.each { line ->
             if (!line.contains("implementation\\(project\\(\":mvi\"\\)\\)")) {
