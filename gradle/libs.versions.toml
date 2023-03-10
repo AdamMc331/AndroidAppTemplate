@@ -3,11 +3,13 @@ activityCompose = "1.6.1"
 androidxTest = "1.1.5"
 appCompat = "1.6.0"
 composeBom = "2023.01.00"
+compileSdk = "33"
 espresso = "3.5.1"
 junit = "4.13.2"
 ktxCore = "1.9.0"
 lifecycle = "2.5.1"
 material = "1.7.0"
+minSdk = "21"
 
 [libraries]
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
