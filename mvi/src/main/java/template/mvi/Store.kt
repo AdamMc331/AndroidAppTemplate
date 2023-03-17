@@ -15,14 +15,35 @@ import kotlinx.coroutines.flow.update
 class Store<S : State, A : Action>(
     initialState: S,
     private val reducer: Reducer<S, A>,
+    // side effects/middleware
 ) {
 
     private val _state = MutableStateFlow(initialState)
     val state = _state.asStateFlow()
 
     fun dispatch(action: A) {
+        middlewares.forEach {
+            middleware.dispatch(action)
+        }
+
         _state.update { currentState ->
             reducer.reduce(currentState, action)
+        }
+    }
+}
+
+class NetworkMiddleware(
+    val api: Api,
+    val store: Store,
+) : Middleware {
+
+    fun dispatch() {
+
+        when (action) {
+            is FetchProfile -> {
+                val profile = api.fetchProfile()
+                store.dispatch(ProfileLoaded(profile))
+            }
         }
     }
 }

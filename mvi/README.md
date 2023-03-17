@@ -10,7 +10,7 @@ To use all of the relevant interfaces for a given screen, such as a `ProfileScre
 
 ```kotlin
 sealed class ProfileScreenAction : Action {
-    data class FetchProfile(
+    data class SetLoading(
         val id: String,
     ) : ProfileScreenAction()
     
