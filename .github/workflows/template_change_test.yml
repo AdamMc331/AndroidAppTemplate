@@ -13,5 +13,8 @@ jobs:
         with:
           java-version: 1.11
 
-      - name: Rename & Build
-        run: ./gradlew renameTemplate build
+      - name: Rename
+        run: ./gradlew renameTemplate
+
+      - name: Build
+        run: ./gradlew build
