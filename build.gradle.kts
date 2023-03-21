@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     extra.apply {
-        set("kotlinVersion", "1.7.10")
+        set("kotlinVersion", "1.8.10")
 
         // https://github.com/detekt/detekt/releases
         set("detektVersion", "1.21.0")
