@@ -28,8 +28,6 @@ class MainActivity : ComponentActivity() {
             TemplateTheme {
                 Surface(
                     color = MaterialTheme.colorScheme.background,
-                    modifier = Modifier
-                        .systemBarsPadding(),
                 ) {
                     Greeting("Android")
                 }
