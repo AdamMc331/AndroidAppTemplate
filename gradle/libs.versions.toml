@@ -1,14 +1,18 @@
 [versions]
-accompanist = "0.30.0"
-activityCompose = "1.7.0"
+accompanist = "0.30.1"
+activityCompose = "1.7.1"
 androidxTest = "1.1.5"
 appCompat = "1.6.1"
 compileSdk = "33"
-composeBom = "2023.03.00"
-composeCompiler = "1.4.4"
+composeBom = "2023.04.01"
+composeCompiler = "1.4.6"
+detektGradlePlugin = "1.22.0"
 espresso = "3.5.1"
+gradle = "7.3.1"
+gradleVersionsPlugin = "0.46.0"
 junit = "4.13.2"
-ktxCore = "1.9.0"
+kotlinGradlePlugin = "1.8.20"
+ktxCore = "1.10.0"
 lifecycle = "2.6.1"
 material = "1.8.0"
 minSdk = "21"
@@ -31,4 +35,8 @@ compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-mani
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
+detekt-gradle-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detektGradlePlugin" }
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+gradle-versions-plugin = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "gradleVersionsPlugin" }
 junit = { module = "junit:junit", version.ref = "junit" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }

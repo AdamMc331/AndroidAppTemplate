@@ -1,14 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    extra.apply {
-        set("kotlinVersion", "1.8.10")
-
-        // https://github.com/detekt/detekt/releases
-        set("detektVersion", "1.21.0")
-
-        // https://github.com/ben-manes/gradle-versions-plugin
-        set("versionsPluginVersion", "0.42.0")
-    }
 
     repositories {
         google()
@@ -17,10 +8,10 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:7.3.1")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${rootProject.extra.get("kotlinVersion")}")
-        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${rootProject.extra.get("detektVersion")}")
-        classpath("com.github.ben-manes:gradle-versions-plugin:${rootProject.extra.get("versionsPluginVersion")}")
+        classpath(libs.detekt.gradle.plugin)
+        classpath(libs.gradle)
+        classpath(libs.gradle.versions.plugin)
+        classpath(libs.kotlin.gradle.plugin)
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
