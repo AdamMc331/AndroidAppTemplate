@@ -46,12 +46,6 @@ task replacePackageInManifest {
     doLast {
         def file = new File("${rootDir}/app/src/main/AndroidManifest.xml")
 
-        // Replace package
-        file.text = file.text.replaceAll(
-                "package=\"${renameConfig.templateName}\"",
-                "package=\"${renameConfig.newPackage}\"",
-        )
-
         // Replace MainActivity reference
         file.text = file.text.replaceAll(
                 "${renameConfig.templateName}.MainActivity",
