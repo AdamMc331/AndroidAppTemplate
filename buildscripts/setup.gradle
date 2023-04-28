@@ -46,16 +46,25 @@ task replacePackageInManifest {
     doLast {
         def file = new File("${rootDir}/app/src/main/AndroidManifest.xml")
 
-        // Replace package
-        file.text = file.text.replaceAll(
-                "package=\"${renameConfig.templateName}\"",
-                "package=\"${renameConfig.newPackage}\"",
-        )
-
         // Replace MainActivity reference
         file.text = file.text.replaceAll(
                 "${renameConfig.templateName}.MainActivity",
                 "${renameConfig.newPackage}.MainActivity",
+        )
+    }
+}
+
+task replacePackageInAppGradle {
+    description "Replaces references to template in app's build.gradle file."
+    group null
+
+    doLast {
+        def file = new File("${rootDir}/app/build.gradle.kts")
+
+        // Replace package
+        file.text = file.text.replaceAll(
+                "namespace = \"${renameConfig.templateName}\"",
+                "namespace = \"${renameConfig.newPackage}\"",
         )
     }
 }
@@ -112,5 +121,6 @@ task renameTemplate {
             replaceApplicationId,
             replaceProjectName,
             replaceAppName,
+            replacePackageInAppGradle,
     )
 }
