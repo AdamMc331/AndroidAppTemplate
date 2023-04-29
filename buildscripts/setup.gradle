@@ -149,8 +149,10 @@ task renameTemplate {
     )
 
     doLast {
-        // After all setup changes happen, run a `git add` so
-        // folks can just immediately commit and push if they wish.
-        commandLine "git", "add", "${rootDir}/."
+        exec {
+            // After all setup changes happen, run a `git add` so
+            // folks can just immediately commit and push if they wish.
+            commandLine "git", "add", "${rootDir}/."
+        }
     }
 }
