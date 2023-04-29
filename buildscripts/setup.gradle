@@ -13,10 +13,8 @@ task deleteSetupCode() {
 
     doLast {
         delete(templateChangeWorkflowFile)
-        ("git add $workflowsFolder").execute()
 
         delete(setupGradle)
-        ("git add $buildscriptsFolder").execute()
 
         // Remove setup.gradle reference in build.gradle by filtering
         // any lines that reference it.
@@ -61,8 +59,6 @@ task renameAppPackage(type: Copy) {
 
     doLast {
         delete(startingDirectory)
-
-        ("git add $endingDirectory").execute()
     }
 }
 
@@ -151,4 +147,10 @@ task renameTemplate {
             replacePackageInAppGradle,
             deleteSetupCode,
     )
+
+    doLast {
+        // After all setup changes happen, run a `git add` so
+        // folks can just immediately commit and push if they wish.
+        commandLine "git", "add", "${rootDir}/."
+    }
 }
