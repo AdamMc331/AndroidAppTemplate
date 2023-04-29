@@ -1,8 +1,10 @@
 def renameConfig = [
-        templateName  : "template",
-        templateAppId : "template.app.id",
-        newPackage    : "domain.yourname.app",
-        newProjectName: "Your Project",
+        templateName             : "template",
+        templateAppId            : "template.app.id",
+        templateMaterialThemeName: "TemplateTheme",
+        newPackage               : "domain.yourname.app",
+        newProjectName           : "Your Project",
+        newMaterialThemeName     : "MyMaterialTheme",
 ]
 
 task renameAppPackage(type: Copy) {
@@ -16,19 +18,24 @@ task renameAppPackage(type: Copy) {
     from(startingDirectory)
     into(endingDirectory)
 
-    // Replace package statements
     filter { line ->
+        // Replace package statements
         line.replaceAll(
                 "package ${renameConfig.templateName}",
                 "package ${renameConfig.newPackage}"
         )
-    }
 
-    // Replace import statements
-    filter { line ->
+        // Replace import statements
         line.replaceAll(
                 "import ${renameConfig.templateName}",
                 "import ${renameConfig.newPackage}"
+        )
+
+        // Replace Theme references. We can just replace on name,
+        // which covers both imports and function calls.
+        line.replaceAll(
+                "${renameConfig.templateMaterialThemeName}",
+                "${renameConfig.newMaterialThemeName}"
         )
     }
 
