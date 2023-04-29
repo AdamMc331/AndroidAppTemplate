@@ -1,8 +1,10 @@
 def renameConfig = [
-        templateName  : "template",
-        templateAppId : "template.app.id",
-        newPackage    : "domain.yourname.app",
-        newProjectName: "Your Project",
+        templateName             : "template",
+        templateAppId            : "template.app.id",
+        templateMaterialThemeName: "TemplateTheme",
+        newPackage               : "domain.yourname.app",
+        newProjectName           : "Your Project",
+        newMaterialThemeName     : "MyMaterialTheme",
 ]
 
 task deleteSetupCode() {
@@ -54,6 +56,15 @@ task renameAppPackage(type: Copy) {
         line.replaceAll(
                 "import ${renameConfig.templateName}",
                 "import ${renameConfig.newPackage}"
+        )
+    }
+
+    // Replace Theme references. We can just replace on name,
+    // which covers both imports and function calls.
+    filter { line ->
+        line.replaceAll(
+                "${renameConfig.templateMaterialThemeName}",
+                "${renameConfig.newMaterialThemeName}"
         )
     }
 
