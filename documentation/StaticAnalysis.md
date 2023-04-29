@@ -10,8 +10,7 @@ To run a detekt validation, use the one of the following Gradle commands:
 
 ```
 ./gradlew detekt # Runs over each module synchronously
-./gradlew detektAll # Runs over each module in parallel. 
-
+./gradlew detektAll # Runs over each module in parallel.
 ```
 
 ## Ktlint
