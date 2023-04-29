@@ -6,10 +6,11 @@ This project leverages static analysis to ensure that the codebase meets certain
 
 [Detekt](https://github.com/detekt/detekt) is a static analysis tool that checks for code smells. Examples include magic numbers, complicated conditionals, long methods, long parameter lists, and so much more. It is highly configurable, and if you choose to turn off any checks or customize thresholds you can do so in the [config file](/config/detekt/detekt.yml).
 
-To run a detekt validation, use the following Gradle command:
+To run a detekt validation, use the one of the following Gradle commands:
 
 ```
-./gradlew detekt
+./gradlew detekt # Runs over each module synchronously
+./gradlew detektAll # Runs over each module in parallel.
 ```
 
 ## Ktlint
