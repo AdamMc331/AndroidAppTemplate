@@ -7,6 +7,31 @@ def renameConfig = [
         newMaterialThemeName     : "MyMaterialTheme",
 ]
 
+task deleteSetupCode() {
+    def workflowsFolder = "${rootDir}/.github/workflows"
+    def buildscriptsFolder = "${rootDir}/buildscripts"
+    def templateChangeWorkflowFile = "$workflowsFolder/template_change_test.yml"
+    def setupGradle = "$buildscriptsFolder/setup.gradle"
+
+    doLast {
+        delete(templateChangeWorkflowFile)
+
+        delete(setupGradle)
+
+        // Remove setup.gradle reference in build.gradle by filtering
+        // any lines that reference it.
+        def rootGradleFile = new File("${rootDir}/build.gradle.kts")
+        List rootGradleLines = rootGradleFile.readLines()
+        rootGradleFile.text = ""
+        rootGradleLines.each { line ->
+            if (!line.contains("setup.gradle")) {
+                rootGradleFile.append(line)
+                rootGradleFile.append("\n")
+            }
+        }
+    }
+}
+
 task renameAppPackage(type: Copy) {
     description "Renames the template package in the app module."
     group null
@@ -41,8 +66,6 @@ task renameAppPackage(type: Copy) {
 
     doLast {
         delete(startingDirectory)
-
-        ("git add $endingDirectory").execute()
     }
 }
 
@@ -129,5 +152,14 @@ task renameTemplate {
             replaceProjectName,
             replaceAppName,
             replacePackageInAppGradle,
+            deleteSetupCode,
     )
+
+    doLast {
+        exec {
+            // After all setup changes happen, run a `git add` so
+            // folks can just immediately commit and push if they wish.
+            commandLine "git", "add", "${rootDir}/."
+        }
+    }
 }

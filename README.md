@@ -24,9 +24,10 @@ gradle task to have the app module's package name and relevant strings replaced.
 
 ### Cleanup
 
-Once you've done this, feel free to delete that [setup.gradle](buildscripts/setup.gradle) file from your project. In 
-addition, you can remove the [template_change_test](.github/workflows/template_change_test.yml) 
-workflow which validates the above process for the template repo itself.
+After [this PR](https://github.com/AdamMc331/AndroidAppTemplate/pull/44), running the renameTemplate
+task should do all the necessary cleanup like deleting the setup file and test workflow so you can 
+go ahead and commit the renamed files and be on your way. If you encounter any problems with the setup
+workflow, please report a new [issue](https://github.com/AdamMc331/AndroidAppTemplate/issues).
 
 ## What's Included
 
