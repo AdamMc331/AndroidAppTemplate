@@ -18,21 +18,25 @@ task renameAppPackage(type: Copy) {
     from(startingDirectory)
     into(endingDirectory)
 
+    // Replace package statements
     filter { line ->
-        // Replace package statements
         line.replaceAll(
                 "package ${renameConfig.templateName}",
                 "package ${renameConfig.newPackage}"
         )
+    }
 
-        // Replace import statements
+    // Replace import statements
+    filter { line ->
         line.replaceAll(
                 "import ${renameConfig.templateName}",
                 "import ${renameConfig.newPackage}"
         )
+    }
 
-        // Replace Theme references. We can just replace on name,
-        // which covers both imports and function calls.
+    // Replace Theme references. We can just replace on name,
+    // which covers both imports and function calls.
+    filter { line ->
         line.replaceAll(
                 "${renameConfig.templateMaterialThemeName}",
                 "${renameConfig.newMaterialThemeName}"
