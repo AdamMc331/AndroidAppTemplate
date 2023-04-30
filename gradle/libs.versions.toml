@@ -13,6 +13,7 @@ gradleVersionsPlugin = "0.46.0"
 junit = "4.13.2"
 kotlinGradlePlugin = "1.8.20"
 ktxCore = "1.10.0"
+leakCanary = "2.10"
 lifecycle = "2.6.1"
 material = "1.8.0"
 minSdk = "21"
@@ -40,3 +41,4 @@ gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 gradle-versions-plugin = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "gradleVersionsPlugin" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
+square-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }

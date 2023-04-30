@@ -77,4 +77,5 @@ dependencies {
 
     debugImplementation(libs.compose.ui.test.manifest)
     debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.square.leakcanary)
 }
