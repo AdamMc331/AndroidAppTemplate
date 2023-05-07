@@ -190,6 +190,7 @@ task renameTemplate {
     group "Template Setup"
 
     dependsOn(
+            keepOrRemoveHilt,
             renameAppPackage,
             replacePackageInManifest,
             replaceApplicationId,
