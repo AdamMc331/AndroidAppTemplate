@@ -10,8 +10,10 @@ detektGradlePlugin = "1.22.0"
 espresso = "3.5.1"
 gradle = "8.0.1"
 gradleVersionsPlugin = "0.46.0"
+hilt = "2.44"
 junit = "4.13.2"
 kotlinGradlePlugin = "1.8.21"
+kotlinter = "3.13.0"
 ktxCore = "1.10.0"
 leakCanary = "2.10"
 lifecycle = "2.6.1"
@@ -39,6 +41,10 @@ compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
 detekt-gradle-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detektGradlePlugin" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 gradle-versions-plugin = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "gradleVersionsPlugin" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
 square-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
