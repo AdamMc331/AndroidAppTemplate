@@ -1,6 +1,10 @@
 name: Android Build
 
-on: pull_request
+on:
+  push:
+    branches:
+      - development
+  pull_request:
 
 jobs:
   build:
@@ -16,6 +20,9 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
+        with:
+          # Only write to the cache for builds on the 'development' branch
+          cache-read-only: ${{ github.ref != 'refs/heads/development' }}
 
       - name: Build Project
         run: ./gradlew assemble
