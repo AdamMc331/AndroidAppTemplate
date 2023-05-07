@@ -5,6 +5,7 @@ def renameConfig = [
         newPackage               : "domain.yourname.app",
         newProjectName           : "Your Project",
         newMaterialThemeName     : "MyMaterialTheme",
+        useHiltDependencies      : true,
 ]
 
 task deleteSetupCode() {
@@ -142,6 +143,45 @@ task replaceAppName {
                 "<string name=\"app_name\">${renameConfig.templateName}</string>",
                 "<string name=\"app_name\">${renameConfig.newProjectName}</string>",
         )
+    }
+}
+
+task keepOrRemoveHilt {
+    description "Keeps or removes dependencies for Hilt library."
+    group null
+
+    doLast {
+        if (renameConfig.useHiltDependencies != true) {
+            def appGradle = new File("${rootDir}/app/build.gradle.kts")
+            List appGradleLines = appGradle.readLines()
+            appGradle.text = ""
+            appGradleLines.each { line ->
+                if (!line.contains("hilt")) {
+                    appGradle.append(line)
+                    appGradle.append("\n")
+                }
+            }
+
+            def rootGradle = new File("${rootDir}/build.gradle.kts")
+            List rootGradleLines = rootGradle.readLines()
+            rootGradle.text = ""
+            rootGradleLines.each { line ->
+                if (!line.contains("hilt")) {
+                    rootGradle.append(line)
+                    rootGradle.append("\n")
+                }
+            }
+
+            def versions = new File("${rootDir}/gradle/libs.versions.toml")
+            List versionsLines = rootGradle.readLines()
+            versions.text = ""
+            versionsLines.each { line ->
+                if (!line.contains("hilt")) {
+                    versions.append(line)
+                    versions.append("\n")
+                }
+            }
+        }
     }
 }
 
