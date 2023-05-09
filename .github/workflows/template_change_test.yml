@@ -4,9 +4,20 @@ on: pull_request
 
 jobs:
   rename-template:
+    strategy:
+      matrix:
+        useHiltDependencies: [true, false]
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set useHiltDependencies
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "useHiltDependencies[ ]+ : true"
+          replace: "useHiltDependencies : ${{ matrix.useHiltDependencies }}"
+          include: "**setup.gradle"
 
       - name: Set Up JDK
         uses: actions/setup-java@v3
