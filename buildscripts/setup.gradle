@@ -5,6 +5,7 @@ def renameConfig = [
         newPackage               : "domain.yourname.app",
         newProjectName           : "Your Project",
         newMaterialThemeName     : "MyMaterialTheme",
+        useHiltDependencies      : true,
 ]
 
 task deleteSetupCode() {
@@ -145,11 +146,51 @@ task replaceAppName {
     }
 }
 
+task keepOrRemoveHilt {
+    description "Keeps or removes dependencies for Hilt library."
+    group null
+
+    doLast {
+        if (renameConfig.useHiltDependencies != true) {
+            def appGradle = new File("${rootDir}/app/build.gradle.kts")
+            List appGradleLines = appGradle.readLines()
+            appGradle.text = ""
+            appGradleLines.each { line ->
+                if (!line.contains("hilt")) {
+                    appGradle.append(line)
+                    appGradle.append("\n")
+                }
+            }
+
+            def rootGradle = new File("${rootDir}/build.gradle.kts")
+            List rootGradleLines = rootGradle.readLines()
+            rootGradle.text = ""
+            rootGradleLines.each { line ->
+                if (!line.contains("hilt")) {
+                    rootGradle.append(line)
+                    rootGradle.append("\n")
+                }
+            }
+
+            def versions = new File("${rootDir}/gradle/libs.versions.toml")
+            List versionsLines = versions.readLines()
+            versions.text = ""
+            versionsLines.each { line ->
+                if (!line.contains("hilt")) {
+                    versions.append(line)
+                    versions.append("\n")
+                }
+            }
+        }
+    }
+}
+
 task renameTemplate {
     description "Runs all of the necessary template setup tasks based on the renameConfig."
     group "Template Setup"
 
     dependsOn(
+            keepOrRemoveHilt,
             renameAppPackage,
             replacePackageInManifest,
             replaceApplicationId,

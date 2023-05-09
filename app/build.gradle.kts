@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
+    id("com.google.dagger.hilt.android")
     id("kotlin-android")
+    id("kotlin-kapt")
     id("org.jmailen.kotlinter")
 }
 
@@ -28,12 +30,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -68,14 +70,19 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.material)
     implementation(libs.compose.ui.tooling)
+    implementation(libs.hilt.android)
 
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.compose.ui.test.junit)
+    androidTestImplementation(libs.hilt.android.testing)
 
     debugImplementation(libs.compose.ui.test.manifest)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.square.leakcanary)
+
+    kapt(libs.hilt.compiler)
+    kaptAndroidTest(libs.hilt.android.compiler)
 }
