@@ -7,6 +7,7 @@ jobs:
     strategy:
       matrix:
         useHiltDependencies: [true, false]
+        useRoomDependencies: [true, false]
 
     runs-on: ubuntu-latest
     steps:
@@ -17,6 +18,13 @@ jobs:
         with:
           find: "useHiltDependencies[ ]+ : true"
           replace: "useHiltDependencies : ${{ matrix.useHiltDependencies }}"
+          include: "**setup.gradle"
+
+      - name: Set useRoomDependencies
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "useRoomDependencies[ ]+ : true"
+          replace: "useRoomDependencies : ${{ matrix.useRoomDependencies }}"
           include: "**setup.gradle"
 
       - name: Set Up JDK
