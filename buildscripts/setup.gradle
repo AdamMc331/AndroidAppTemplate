@@ -173,7 +173,7 @@ task keepOrRemoveHilt {
             }
 
             def versions = new File("${rootDir}/gradle/libs.versions.toml")
-            List versionsLines = rootGradle.readLines()
+            List versionsLines = versions.readLines()
             versions.text = ""
             versionsLines.each { line ->
                 if (!line.contains("hilt")) {
