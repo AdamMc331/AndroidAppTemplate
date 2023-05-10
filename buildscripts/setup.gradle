@@ -194,8 +194,8 @@ def removeTextFromFile(fileName, text) {
     file.text = ""
     fileLines.each { line ->
         if (!line.contains(text)) {
-            versions.append(line)
-            versions.append("\n")
+            file.append(line)
+            file.append("\n")
         }
     }
 }
