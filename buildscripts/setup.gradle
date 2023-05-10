@@ -16,21 +16,9 @@ task deleteSetupCode() {
     def setupGradle = "$buildscriptsFolder/setup.gradle"
 
     doLast {
+        removeTextFromFile("${rootDir}/build.gradle.kts", "setup.gradle")
         delete(templateChangeWorkflowFile)
-
         delete(setupGradle)
-
-        // Remove setup.gradle reference in build.gradle by filtering
-        // any lines that reference it.
-        def rootGradleFile = new File("${rootDir}/build.gradle.kts")
-        List rootGradleLines = rootGradleFile.readLines()
-        rootGradleFile.text = ""
-        rootGradleLines.each { line ->
-            if (!line.contains("setup.gradle")) {
-                rootGradleFile.append(line)
-                rootGradleFile.append("\n")
-            }
-        }
     }
 }
 
@@ -75,141 +63,61 @@ task renameAppPackage(type: Copy) {
     }
 }
 
-task replacePackageInManifest {
-    description "Replaces references to template in AndroidManifest.xml file."
+task replaceTemplateReferences {
+    description "Replaces references to template in various files."
     group null
 
     doLast {
-        def file = new File("${rootDir}/app/src/main/AndroidManifest.xml")
-
-        // Replace MainActivity reference
-        file.text = file.text.replaceAll(
+        replaceTextInFile(
+                "${rootDir}/app/src/main/AndroidManifest.xml",
                 "${renameConfig.templateName}.MainActivity",
                 "${renameConfig.newPackage}.MainActivity",
         )
-    }
-}
 
-task replacePackageInAppGradle {
-    description "Replaces references to template in app's build.gradle file."
-    group null
-
-    doLast {
-        def file = new File("${rootDir}/app/build.gradle.kts")
-
-        // Replace package
-        file.text = file.text.replaceAll(
+        replaceTextInFile(
+                "${rootDir}/app/build.gradle.kts",
                 "namespace = \"${renameConfig.templateName}\"",
                 "namespace = \"${renameConfig.newPackage}\"",
         )
-    }
-}
 
-task replaceApplicationId {
-    description "Replaces application ID in app/build.gradle.kts file."
-    group null
-
-    doLast {
-        def file = new File("${rootDir}/app/build.gradle.kts")
-
-        file.text = file.text.replaceAll(
+        replaceTextInFile(
+                "${rootDir}/app/build.gradle.kts",
                 "applicationId = \"${renameConfig.templateAppId}\"",
                 "applicationId = \"${renameConfig.newPackage}\"",
         )
-    }
-}
 
-task replaceProjectName {
-    description "Replaces project name in settings.gradle.kts file."
-    group null
-
-    doLast {
-        def file = new File("${rootDir}/settings.gradle.kts")
-
-        file.text = file.text.replaceAll(
+        replaceTextInFile(
+                "${rootDir}/settings.gradle.kts",
                 "rootProject.name = \"${renameConfig.templateName}\"",
                 "rootProject.name = \"${renameConfig.newProjectName}\"",
         )
-    }
-}
 
-task replaceAppName {
-    description "Replaces app name in strings.xml file."
-    group null
-
-    doLast {
-        def file = new File("${rootDir}/app/src/main/res/values/strings.xml")
-
-        file.text = file.text.replaceAll(
+        replaceTextInFile(
+                "${rootDir}/app/src/main/res/values/strings.xml",
                 "<string name=\"app_name\">${renameConfig.templateName}</string>",
                 "<string name=\"app_name\">${renameConfig.newProjectName}</string>",
         )
     }
 }
 
-task keepOrRemoveHilt {
-    description "Keeps or removes dependencies for Hilt library."
+task keepOrRemoveDependencies {
+    description "Keeps or removes certain dependencies defined in renameConfig."
     group null
 
     doLast {
-        if (renameConfig.useHiltDependencies != true) {
-            def appGradle = new File("${rootDir}/app/build.gradle.kts")
-            List appGradleLines = appGradle.readLines()
-            appGradle.text = ""
-            appGradleLines.each { line ->
-                if (!line.contains("hilt")) {
-                    appGradle.append(line)
-                    appGradle.append("\n")
-                }
+        def filesWithDependencies = [
+                "${rootDir}/build.gradle.kts",
+                "${rootDir}/app/build.gradle.kts",
+                "${rootDir}/gradle/libs.versions.toml",
+        ]
+
+        filesWithDependencies.each { fileName ->
+            if (renameConfig.useHiltDependencies != true) {
+                removeTextFromFile(fileName, "hilt")
             }
 
-            def rootGradle = new File("${rootDir}/build.gradle.kts")
-            List rootGradleLines = rootGradle.readLines()
-            rootGradle.text = ""
-            rootGradleLines.each { line ->
-                if (!line.contains("hilt")) {
-                    rootGradle.append(line)
-                    rootGradle.append("\n")
-                }
-            }
-
-            def versions = new File("${rootDir}/gradle/libs.versions.toml")
-            List versionsLines = versions.readLines()
-            versions.text = ""
-            versionsLines.each { line ->
-                if (!line.contains("hilt")) {
-                    versions.append(line)
-                    versions.append("\n")
-                }
-            }
-        }
-    }
-}
-
-task keepOrRemoveRoom {
-    description "Keeps or removes dependencies for Room library."
-    group null
-
-    doLast {
-        if (renameConfig.useRoomDependencies != true) {
-            def appGradle = new File("${rootDir}/app/build.gradle.kts")
-            List appGradleLines = appGradle.readLines()
-            appGradle.text = ""
-            appGradleLines.each { line ->
-                if (!line.contains("room")) {
-                    appGradle.append(line)
-                    appGradle.append("\n")
-                }
-            }
-
-            def versions = new File("${rootDir}/gradle/libs.versions.toml")
-            List versionsLines = versions.readLines()
-            versions.text = ""
-            versionsLines.each { line ->
-                if (!line.contains("room")) {
-                    versions.append(line)
-                    versions.append("\n")
-                }
+            if (renameConfig.useRoomDependencies != true) {
+                removeTextFromFile(fileName, "room")
             }
         }
     }
@@ -220,14 +128,9 @@ task renameTemplate {
     group "Template Setup"
 
     dependsOn(
-            keepOrRemoveHilt,
-            keepOrRemoveRoom,
+            keepOrRemoveDependencies,
             renameAppPackage,
-            replacePackageInManifest,
-            replaceApplicationId,
-            replaceProjectName,
-            replaceAppName,
-            replacePackageInAppGradle,
+            replaceTemplateReferences,
             deleteSetupCode,
     )
 
@@ -236,6 +139,30 @@ task renameTemplate {
             // After all setup changes happen, run a `git add` so
             // folks can just immediately commit and push if they wish.
             commandLine "git", "add", "${rootDir}/."
+        }
+    }
+}
+
+/**
+ * Replaces all instances of [text] in a given [fileName].
+ */
+static def replaceTextInFile(fileName, originalText, newText) {
+    def file = new File(fileName)
+
+    file.text = file.text.replaceAll(originalText, newText)
+}
+
+/**
+ * Removes all lines from the given fileName that contain some supplied text.
+ */
+static def removeTextFromFile(fileName, text) {
+    def file = new File(fileName)
+    List fileLines = file.readLines()
+    file.text = ""
+    fileLines.each { line ->
+        if (!line.contains(text)) {
+            file.append(line)
+            file.append("\n")
         }
     }
 }
