@@ -6,6 +6,7 @@ def renameConfig = [
         newProjectName           : "Your Project",
         newMaterialThemeName     : "MyMaterialTheme",
         useHiltDependencies      : true,
+        useRoomDependencies      : true,
 ]
 
 task deleteSetupCode() {
@@ -185,12 +186,42 @@ task keepOrRemoveHilt {
     }
 }
 
+task keepOrRemoveRoom {
+    description "Keeps or removes dependencies for Room library."
+    group null
+
+    doLast {
+        if (renameConfig.useRoomDependencies != true) {
+            def appGradle = new File("${rootDir}/app/build.gradle.kts")
+            List appGradleLines = appGradle.readLines()
+            appGradle.text = ""
+            appGradleLines.each { line ->
+                if (!line.contains("room")) {
+                    appGradle.append(line)
+                    appGradle.append("\n")
+                }
+            }
+
+            def versions = new File("${rootDir}/gradle/libs.versions.toml")
+            List versionsLines = versions.readLines()
+            versions.text = ""
+            versionsLines.each { line ->
+                if (!line.contains("room")) {
+                    versions.append(line)
+                    versions.append("\n")
+                }
+            }
+        }
+    }
+}
+
 task renameTemplate {
     description "Runs all of the necessary template setup tasks based on the renameConfig."
     group "Template Setup"
 
     dependsOn(
             keepOrRemoveHilt,
+            keepOrRemoveRoom,
             renameAppPackage,
             replacePackageInManifest,
             replaceApplicationId,

@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.room.runtime)
     implementation(libs.android.material)
     implementation(libs.compose.ui)
     implementation(libs.compose.material)
@@ -83,6 +84,9 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.square.leakcanary)
 
+    kapt(libs.androidx.room.compiler)
     kapt(libs.hilt.compiler)
     kaptAndroidTest(libs.hilt.android.compiler)
+
+    annotationProcessor(libs.androidx.room.compiler)
 }
