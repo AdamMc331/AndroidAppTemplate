@@ -221,6 +221,7 @@ task renameTemplate {
 
     dependsOn(
             keepOrRemoveHilt,
+            keepOrRemoveRoom,
             renameAppPackage,
             replacePackageInManifest,
             replaceApplicationId,
