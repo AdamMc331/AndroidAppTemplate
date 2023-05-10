@@ -16,9 +16,9 @@ task deleteSetupCode() {
     def setupGradle = "$buildscriptsFolder/setup.gradle"
 
     doLast {
+        removeTextFromFile("${rootDir}/build.gradle.kts", "setup.gradle")
         delete(templateChangeWorkflowFile)
         delete(setupGradle)
-        removeTextFromFile("${rootDir}/build.gradle.kts", "setup.gradle")
     }
 }
 
