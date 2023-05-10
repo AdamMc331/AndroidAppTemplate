@@ -63,8 +63,8 @@ task renameAppPackage(type: Copy) {
     }
 }
 
-task replacePackageInManifest {
-    description "Replaces references to template in AndroidManifest.xml file."
+task replaceTemplateReferences {
+    description "Replaces references to template in various files."
     group null
 
     doLast {
@@ -73,53 +73,25 @@ task replacePackageInManifest {
                 "${renameConfig.templateName}.MainActivity",
                 "${renameConfig.newPackage}.MainActivity",
         )
-    }
-}
 
-task replacePackageInAppGradle {
-    description "Replaces references to template in app's build.gradle file."
-    group null
-
-    doLast {
         replaceTextInFile(
                 "${rootDir}/app/build.gradle.kts",
                 "namespace = \"${renameConfig.templateName}\"",
                 "namespace = \"${renameConfig.newPackage}\"",
         )
-    }
-}
 
-task replaceApplicationId {
-    description "Replaces application ID in app/build.gradle.kts file."
-    group null
-
-    doLast {
         replaceTextInFile(
                 "${rootDir}/app/build.gradle.kts",
                 "applicationId = \"${renameConfig.templateAppId}\"",
                 "applicationId = \"${renameConfig.newPackage}\"",
         )
-    }
-}
 
-task replaceProjectName {
-    description "Replaces project name in settings.gradle.kts file."
-    group null
-
-    doLast {
         replaceTextInFile(
                 "${rootDir}/settings.gradle.kts",
                 "rootProject.name = \"${renameConfig.templateName}\"",
                 "rootProject.name = \"${renameConfig.newProjectName}\"",
         )
-    }
-}
 
-task replaceAppName {
-    description "Replaces app name in strings.xml file."
-    group null
-
-    doLast {
         replaceTextInFile(
                 "${rootDir}/app/src/main/res/values/strings.xml",
                 "<string name=\"app_name\">${renameConfig.templateName}</string>",
@@ -161,11 +133,7 @@ task renameTemplate {
             keepOrRemoveHilt,
             keepOrRemoveRoom,
             renameAppPackage,
-            replacePackageInManifest,
-            replaceApplicationId,
-            replaceProjectName,
-            replaceAppName,
-            replacePackageInAppGradle,
+            replaceTemplateReferences,
             deleteSetupCode,
     )
 
