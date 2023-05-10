@@ -188,7 +188,7 @@ task renameTemplate {
 /**
  * Removes all lines from the given fileName that contain some supplied text.
  */
-def removeTextFromFile = { fileName, text ->
+def removeTextFromFile(fileName, text) {
     def file = new File(fileName)
     List fileLines = file.readLines()
     file.text = ""
