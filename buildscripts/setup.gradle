@@ -100,27 +100,25 @@ task replaceTemplateReferences {
     }
 }
 
-task keepOrRemoveHilt {
-    description "Keeps or removes dependencies for Hilt library."
+task keepOrRemoveDependencies {
+    description "Keeps or removes certain dependencies defined in renameConfig."
     group null
 
     doLast {
-        if (renameConfig.useHiltDependencies != true) {
-            removeTextFromFile("${rootDir}/app/build.gradle.kts", "hilt")
-            removeTextFromFile("${rootDir}/build.gradle.kts", "hilt")
-            removeTextFromFile("${rootDir}/gradle/libs.versions.toml", "hilt")
-        }
-    }
-}
+        def filesWithDependencies = [
+                "${rootDir}/build.gradle.kts",
+                "${rootDir}/app/build.gradle.kts",
+                "${rootDir}/gradle/libs.versions.toml",
+        ]
 
-task keepOrRemoveRoom {
-    description "Keeps or removes dependencies for Room library."
-    group null
+        filesWithDependencies.each { fileName ->
+            if (renameConfig.useHiltDependencies != true) {
+                removeTextFromFile(fileName, "hilt")
+            }
 
-    doLast {
-        if (renameConfig.useRoomDependencies != true) {
-            removeTextFromFile("${rootDir}/app/build.gradle.kts", "room")
-            removeTextFromFile("${rootDir}/gradle/libs.versions.toml", "room")
+            if (renameConfig.useRoomDependencies != true) {
+                removeTextFromFile(fileName, "room")
+            }
         }
     }
 }
@@ -130,8 +128,7 @@ task renameTemplate {
     group "Template Setup"
 
     dependsOn(
-            keepOrRemoveHilt,
-            keepOrRemoveRoom,
+            keepOrRemoveDependencies,
             renameAppPackage,
             replaceTemplateReferences,
             deleteSetupCode,
