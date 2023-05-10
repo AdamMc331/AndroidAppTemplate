@@ -68,10 +68,8 @@ task replacePackageInManifest {
     group null
 
     doLast {
-        def file = new File("${rootDir}/app/src/main/AndroidManifest.xml")
-
-        // Replace MainActivity reference
-        file.text = file.text.replaceAll(
+        replaceTextInFile(
+                "${rootDir}/app/src/main/AndroidManifest.xml",
                 "${renameConfig.templateName}.MainActivity",
                 "${renameConfig.newPackage}.MainActivity",
         )
@@ -83,10 +81,8 @@ task replacePackageInAppGradle {
     group null
 
     doLast {
-        def file = new File("${rootDir}/app/build.gradle.kts")
-
-        // Replace package
-        file.text = file.text.replaceAll(
+        replaceTextInFile(
+                "${rootDir}/app/build.gradle.kts",
                 "namespace = \"${renameConfig.templateName}\"",
                 "namespace = \"${renameConfig.newPackage}\"",
         )
@@ -98,9 +94,8 @@ task replaceApplicationId {
     group null
 
     doLast {
-        def file = new File("${rootDir}/app/build.gradle.kts")
-
-        file.text = file.text.replaceAll(
+        replaceTextInFile(
+                "${rootDir}/app/build.gradle.kts",
                 "applicationId = \"${renameConfig.templateAppId}\"",
                 "applicationId = \"${renameConfig.newPackage}\"",
         )
@@ -112,9 +107,8 @@ task replaceProjectName {
     group null
 
     doLast {
-        def file = new File("${rootDir}/settings.gradle.kts")
-
-        file.text = file.text.replaceAll(
+        replaceTextInFile(
+                "${rootDir}/settings.gradle.kts",
                 "rootProject.name = \"${renameConfig.templateName}\"",
                 "rootProject.name = \"${renameConfig.newProjectName}\"",
         )
@@ -126,9 +120,8 @@ task replaceAppName {
     group null
 
     doLast {
-        def file = new File("${rootDir}/app/src/main/res/values/strings.xml")
-
-        file.text = file.text.replaceAll(
+        replaceTextInFile(
+                "${rootDir}/app/src/main/res/values/strings.xml",
                 "<string name=\"app_name\">${renameConfig.templateName}</string>",
                 "<string name=\"app_name\">${renameConfig.newProjectName}</string>",
         )
@@ -186,9 +179,18 @@ task renameTemplate {
 }
 
 /**
+ * Replaces all instances of [text] in a given [fileName].
+ */
+static def replaceTextInFile(fileName, originalText, newText) {
+    def file = new File(fileName)
+
+    file.text = file.text.replaceAll(originalText, newText)
+}
+
+/**
  * Removes all lines from the given fileName that contain some supplied text.
  */
-def removeTextFromFile(fileName, text) {
+static def removeTextFromFile(fileName, text) {
     def file = new File(fileName)
     List fileLines = file.readLines()
     file.text = ""
