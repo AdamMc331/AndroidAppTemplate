@@ -17,20 +17,8 @@ task deleteSetupCode() {
 
     doLast {
         delete(templateChangeWorkflowFile)
-
         delete(setupGradle)
-
-        // Remove setup.gradle reference in build.gradle by filtering
-        // any lines that reference it.
-        def rootGradleFile = new File("${rootDir}/build.gradle.kts")
-        List rootGradleLines = rootGradleFile.readLines()
-        rootGradleFile.text = ""
-        rootGradleLines.each { line ->
-            if (!line.contains("setup.gradle")) {
-                rootGradleFile.append(line)
-                rootGradleFile.append("\n")
-            }
-        }
+        removeTextFromFile("${rootDir}/build.gradle.kts", "setup.gradle")
     }
 }
 
@@ -153,35 +141,9 @@ task keepOrRemoveHilt {
 
     doLast {
         if (renameConfig.useHiltDependencies != true) {
-            def appGradle = new File("${rootDir}/app/build.gradle.kts")
-            List appGradleLines = appGradle.readLines()
-            appGradle.text = ""
-            appGradleLines.each { line ->
-                if (!line.contains("hilt")) {
-                    appGradle.append(line)
-                    appGradle.append("\n")
-                }
-            }
-
-            def rootGradle = new File("${rootDir}/build.gradle.kts")
-            List rootGradleLines = rootGradle.readLines()
-            rootGradle.text = ""
-            rootGradleLines.each { line ->
-                if (!line.contains("hilt")) {
-                    rootGradle.append(line)
-                    rootGradle.append("\n")
-                }
-            }
-
-            def versions = new File("${rootDir}/gradle/libs.versions.toml")
-            List versionsLines = versions.readLines()
-            versions.text = ""
-            versionsLines.each { line ->
-                if (!line.contains("hilt")) {
-                    versions.append(line)
-                    versions.append("\n")
-                }
-            }
+            removeTextFromFile("${rootDir}/app/build.gradle.kts", "hilt")
+            removeTextFromFile("${rootDir}/build.gradle.kts", "hilt")
+            removeTextFromFile("${rootDir}/gradle/libs.versions.toml", "hilt")
         }
     }
 }
@@ -192,25 +154,8 @@ task keepOrRemoveRoom {
 
     doLast {
         if (renameConfig.useRoomDependencies != true) {
-            def appGradle = new File("${rootDir}/app/build.gradle.kts")
-            List appGradleLines = appGradle.readLines()
-            appGradle.text = ""
-            appGradleLines.each { line ->
-                if (!line.contains("room")) {
-                    appGradle.append(line)
-                    appGradle.append("\n")
-                }
-            }
-
-            def versions = new File("${rootDir}/gradle/libs.versions.toml")
-            List versionsLines = versions.readLines()
-            versions.text = ""
-            versionsLines.each { line ->
-                if (!line.contains("room")) {
-                    versions.append(line)
-                    versions.append("\n")
-                }
-            }
+            removeTextFromFile("${rootDir}/app/build.gradle.kts", "room")
+            removeTextFromFile("${rootDir}/gradle/libs.versions.toml", "room")
         }
     }
 }
@@ -236,6 +181,21 @@ task renameTemplate {
             // After all setup changes happen, run a `git add` so
             // folks can just immediately commit and push if they wish.
             commandLine "git", "add", "${rootDir}/."
+        }
+    }
+}
+
+/**
+ * Removes all lines from the given fileName that contain some supplied text.
+ */
+def removeTextFromFile = { fileName, text ->
+    def file = new File(fileName)
+    List fileLines = file.readLines()
+    file.text = ""
+    fileLines.each { line ->
+        if (!line.contains(text)) {
+            versions.append(line)
+            versions.append("\n")
         }
     }
 }
