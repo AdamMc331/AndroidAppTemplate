@@ -72,6 +72,9 @@ dependencies {
     implementation(libs.compose.material)
     implementation(libs.compose.ui.tooling)
     implementation(libs.hilt.android)
+    implementation(libs.square.moshi.kotlin)
+    implementation(libs.square.retrofit)
+    implementation(libs.square.retrofit.converter.moshi)
 
     testImplementation(libs.junit)
 
@@ -86,6 +89,7 @@ dependencies {
 
     kapt(libs.androidx.room.compiler)
     kapt(libs.hilt.compiler)
+    kapt(libs.square.moshi.kotlin.codegen)
     kaptAndroidTest(libs.hilt.android.compiler)
 
     annotationProcessor(libs.androidx.room.compiler)
