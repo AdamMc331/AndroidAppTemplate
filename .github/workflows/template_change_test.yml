@@ -8,6 +8,7 @@ jobs:
       matrix:
         useHiltDependencies: [true, false]
         useRoomDependencies: [true, false]
+        useRetrofitDependencies: [true, false]
 
     runs-on: ubuntu-latest
     steps:
@@ -25,6 +26,13 @@ jobs:
         with:
           find: "useRoomDependencies[ ]+ : true"
           replace: "useRoomDependencies : ${{ matrix.useRoomDependencies }}"
+          include: "**setup.gradle"
+
+      - name: Set useRetrofitDependencies
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "useRetrofitDependencies[ ]+ : true"
+          replace: "useRetrofitDependencies : ${{ matrix.useRetrofitDependencies }}"
           include: "**setup.gradle"
 
       - name: Set Up JDK

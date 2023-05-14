@@ -7,6 +7,7 @@ def renameConfig = [
         newMaterialThemeName     : "MyMaterialTheme",
         useHiltDependencies      : true,
         useRoomDependencies      : true,
+        useRetrofitDependencies  : true,
 ]
 
 task deleteSetupCode() {
@@ -118,6 +119,11 @@ task keepOrRemoveDependencies {
 
             if (renameConfig.useRoomDependencies != true) {
                 removeTextFromFile(fileName, "room")
+            }
+
+            if (renameConfig.useRetrofitDependencies != true) {
+                removeTextFromFile(fileName, "retrofit")
+                removeTextFromFile(fileName, "moshi")
             }
         }
     }
