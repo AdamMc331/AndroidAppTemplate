@@ -15,11 +15,13 @@ task deleteSetupCode() {
     def buildscriptsFolder = "${rootDir}/buildscripts"
     def templateChangeWorkflowFile = "$workflowsFolder/template_change_test.yml"
     def setupGradle = "$buildscriptsFolder/setup.gradle"
+    def renovateFile = "${rootDir}/renovate.json"
 
     doLast {
         removeTextFromFile("${rootDir}/build.gradle.kts", "setup.gradle")
         delete(templateChangeWorkflowFile)
         delete(setupGradle)
+        delete(renovateFile)
     }
 }
 
