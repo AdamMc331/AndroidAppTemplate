@@ -36,12 +36,12 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 dependencies {
-    compileOnly("com.android.tools.build:gradle:8.1.1") //    compileOnly(libs.android.gradlePlugin)
-    compileOnly("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0") //    compileOnly(libs.kotlin.gradlePlugin)
-    compileOnly("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.1")
+    compileOnly(libs.android.gradlePlugin)
+    compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.detekt.gradlePlugin)
     compileOnly(libs.ktlint.kotlinter.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
-    compileOnly("com.github.ben-manes:gradle-versions-plugin:0.48.0")
+    compileOnly(libs.ben.manes.gradlePlugin)
 }
 
 gradlePlugin {
