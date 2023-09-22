@@ -1,5 +1,3 @@
-package template
-
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import template.buildlogic.configureDependencyChecker
