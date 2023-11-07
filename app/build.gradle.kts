@@ -1,8 +1,8 @@
 plugins {
     id("com.android.application")
     id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
     id("kotlin-android")
-    id("kotlin-kapt")
     id("org.jmailen.kotlinter")
 }
 
@@ -87,10 +87,10 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.square.leakcanary)
 
-    kapt(libs.androidx.room.compiler)
-    kapt(libs.hilt.compiler)
-    kapt(libs.square.moshi.kotlin.codegen)
-    kaptAndroidTest(libs.hilt.android.compiler)
+    ksp(libs.androidx.room.compiler)
+    ksp(libs.hilt.compiler)
+    ksp(libs.square.moshi.kotlin.codegen)
+    kspAndroidTest(libs.hilt.android.compiler)
 
     annotationProcessor(libs.androidx.room.compiler)
 }
