@@ -11,15 +11,17 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
-private val darkColorScheme = darkColorScheme(
-    primary = Purple200,
-    secondary = Teal200,
-)
+private val darkColorScheme =
+    darkColorScheme(
+        primary = Purple200,
+        secondary = Teal200,
+    )
 
-private val lightColorScheme = lightColorScheme(
-    primary = Purple500,
-    secondary = Teal200,
-)
+private val lightColorScheme =
+    lightColorScheme(
+        primary = Purple500,
+        secondary = Teal200,
+    )
 
 @Composable
 @TargetApi(Build.VERSION_CODES.S)
@@ -28,12 +30,13 @@ fun TemplateTheme(
     dynamicTheme: Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S,
     content: @Composable () -> Unit,
 ) {
-    val colorScheme = when {
-        dynamicTheme && darkTheme -> dynamicDarkColorScheme(LocalContext.current)
-        dynamicTheme && !darkTheme -> dynamicLightColorScheme(LocalContext.current)
-        darkTheme -> darkColorScheme
-        else -> lightColorScheme
-    }
+    val colorScheme =
+        when {
+            dynamicTheme && darkTheme -> dynamicDarkColorScheme(LocalContext.current)
+            dynamicTheme && !darkTheme -> dynamicLightColorScheme(LocalContext.current)
+            darkTheme -> darkColorScheme
+            else -> lightColorScheme
+        }
 
     MaterialTheme(
         colorScheme = colorScheme,
