@@ -40,6 +40,7 @@ plugins {
     id("com.google.dagger.hilt.android").version(libs.versions.hilt).apply(false)
     id("io.gitlab.arturbosch.detekt").version(libs.versions.detektGradlePlugin)
     id("org.jmailen.kotlinter").version(libs.versions.kotlinter).apply(false)
+    id("com.google.devtools.ksp").version(libs.versions.ksp).apply(false)
 }
 
 apply(from = "buildscripts/githooks.gradle")
