@@ -23,4 +23,11 @@ echo "$CHANGED_FILES" | while read -r file; do
 done
 
 echo "Completed ktlint hook."
+
 ######## KTLINT-GRADLE HOOK END ########
+
+echo "Sorting dependencies."
+
+./gradlew sortDependencies
+
+echo "Completed sorting dependencies."

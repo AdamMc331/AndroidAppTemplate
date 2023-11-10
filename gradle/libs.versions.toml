@@ -24,6 +24,7 @@ minSdk = "21"
 moshi = "1.15.0"
 retrofit = "2.9.0"
 room = "2.6.0"
+sortDependencies = "0.4"
 
 [libraries]
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }

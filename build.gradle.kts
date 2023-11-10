@@ -41,6 +41,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt").version(libs.versions.detektGradlePlugin)
     id("org.jmailen.kotlinter").version(libs.versions.kotlinter).apply(false)
     id("com.google.devtools.ksp").version(libs.versions.ksp).apply(false)
+    id("com.squareup.sort-dependencies").version(libs.versions.sortDependencies).apply(false)
 }
 
 apply(from = "buildscripts/githooks.gradle")
@@ -52,7 +53,7 @@ subprojects {
 }
 
 tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+    delete(rootProject.layout.buildDirectory)
 }
 
 afterEvaluate {
