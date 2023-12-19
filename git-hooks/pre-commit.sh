@@ -16,14 +16,6 @@ echo "$CHANGED_FILES"
 
 echo "Completed ktlint run."
 
-echo "$CHANGED_FILES" | while read -r file; do
-    if [ -f $file ]; then
-        git add $file
-    fi
-done
-
-echo "Completed ktlint hook."
-
 ######## KTLINT-GRADLE HOOK END ########
 
 echo "Sorting dependencies."
@@ -31,3 +23,14 @@ echo "Sorting dependencies."
 ./gradlew sortDependencies
 
 echo "Completed sorting dependencies."
+
+## I still think there might be edge cases that if the sort task modifies a non kts gradle
+## file, or libs.versions.toml for example, that this commit hook is still a little broken.
+
+echo "$CHANGED_FILES" | while read -r file; do
+    if [ -f $file ]; then
+        git add $file
+    fi
+done
+
+echo "Completed pre-commit hook."
