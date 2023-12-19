@@ -1,4 +1,5 @@
 plugins {
+    id("app.cash.paparazzi")
     id("com.android.application")
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
