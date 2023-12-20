@@ -67,8 +67,9 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.android.material)
-    implementation(libs.androidx.activity.compose)
+    // Testing reorder
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.room.runtime)
