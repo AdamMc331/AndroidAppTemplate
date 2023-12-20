@@ -9,6 +9,7 @@ jobs:
         useHiltDependencies: [true, false]
         useRoomDependencies: [true, false]
         useRetrofitDependencies: [true, false]
+        usePaparazziDependencies: [true, false]
 
     runs-on: ubuntu-latest
     steps:
@@ -33,6 +34,13 @@ jobs:
         with:
           find: "useRetrofitDependencies[ ]+ : true"
           replace: "useRetrofitDependencies : ${{ matrix.useRetrofitDependencies }}"
+          include: "**setup.gradle"
+
+      - name: Set usePaparazziDependencies
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "usePaparazziDependencies[ ]+ : true"
+          replace: "usePaparazziDependencies : ${{ matrix.usePaparazziDependencies }}"
           include: "**setup.gradle"
 
       - name: Set Up JDK
