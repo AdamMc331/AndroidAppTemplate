@@ -8,6 +8,7 @@ def renameConfig = [
         useHiltDependencies      : true,
         useRoomDependencies      : true,
         useRetrofitDependencies  : true,
+        usePaparazziDependencies : true,
 ]
 
 task deleteSetupCode() {
@@ -126,6 +127,10 @@ task keepOrRemoveDependencies {
             if (renameConfig.useRetrofitDependencies != true) {
                 removeTextFromFile(fileName, "retrofit")
                 removeTextFromFile(fileName, "moshi")
+            }
+
+            if (renameConfig.usePaparazziDependencies != true) {
+                removeTextFromFile(fileName, "paparazzi")
             }
         }
     }
