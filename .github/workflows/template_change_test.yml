@@ -11,7 +11,8 @@ jobs:
         useRetrofitDependencies: [true, false]
         usePaparazziDependencies: [true, false]
 
-    runs-on: macos-14
+    # NOTE: This workflow needs to run on linux for the find and replace action below.
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
