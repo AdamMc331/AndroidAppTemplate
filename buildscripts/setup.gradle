@@ -117,19 +117,23 @@ task keepOrRemoveDependencies {
 
         filesWithDependencies.each { fileName ->
             if (renameConfig.useHiltDependencies != true) {
+                println("Removing hilt dependencies")
                 removeTextFromFile(fileName, "hilt")
             }
 
             if (renameConfig.useRoomDependencies != true) {
+                println("Removing room dependencies")
                 removeTextFromFile(fileName, "room")
             }
 
             if (renameConfig.useRetrofitDependencies != true) {
+                println("Removing retrofit dependencies")
                 removeTextFromFile(fileName, "retrofit")
                 removeTextFromFile(fileName, "moshi")
             }
 
             if (renameConfig.usePaparazziDependencies != true) {
+                println("Removing paparazzi dependencies")
                 removeTextFromFile(fileName, "paparazzi")
             }
         }
