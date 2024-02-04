@@ -18,28 +18,28 @@ jobs:
       - name: Set useHiltDependencies
         uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
-          old-string: "useHiltDependencies[ ]+ : true"
+          old-string: 'useHiltDependencies.* : true'
           new-string: "useHiltDependencies : ${{ matrix.useHiltDependencies }}"
           file: "buildscripts/setup.gradle"
 
       - name: Set useRoomDependencies
         uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
-          old-string: "useRoomDependencies[ ]+ : true"
+          old-string: 'useRoomDependencies.* : true'
           new-string: "useRoomDependencies : ${{ matrix.useRoomDependencies }}"
           file: "buildscripts/setup.gradle"
 
       - name: Set useRetrofitDependencies
         uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
-          old-string: "useRetrofitDependencies[ ]+ : true"
+          old-string: 'useRetrofitDependencies.* : true'
           new-string: "useRetrofitDependencies : ${{ matrix.useRetrofitDependencies }}"
           file: "buildscripts/setup.gradle"
 
       - name: Set usePaparazziDependencies
         uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
-          old-string: "usePaparazziDependencies[ ]+ : true"
+          old-string: 'usePaparazziDependencies.* : true'
           new-string: "usePaparazziDependencies : ${{ matrix.usePaparazziDependencies }}"
           file: "buildscripts/setup.gradle"
 
