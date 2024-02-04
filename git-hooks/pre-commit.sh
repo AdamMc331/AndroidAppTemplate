@@ -30,7 +30,7 @@ echo "Sorting dependencies."
 
 echo "Completed sorting dependencies."
 
-CHANGED_VERSION_FILES="$(git --no-pager diff --name-status --no-color --cached | awk '$1 != "D" && $2 ~ /\.gradle\|\.toml\/ { print $2}')"
+CHANGED_VERSION_FILES="$(git --no-pager diff --name-status --no-color --cached | awk '$1 != "D" && $2 ~ /\.gradle|\.toml|\.gradle.kts/ { print $2}')"
 
 echo "$CHANGED_VERSION_FILES" | while read -r file; do
     if [ -f $file ]; then
