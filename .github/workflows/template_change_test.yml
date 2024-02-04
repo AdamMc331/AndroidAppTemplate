@@ -11,37 +11,37 @@ jobs:
         useRetrofitDependencies: [true, false]
         usePaparazziDependencies: [true, false]
 
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
 
       - name: Set useHiltDependencies
-        uses: jacobtomlinson/gha-find-replace@v3
+        uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
-          find: "useHiltDependencies[ ]+ : true"
-          replace: "useHiltDependencies : ${{ matrix.useHiltDependencies }}"
-          include: "**setup.gradle"
+          old-string: "useHiltDependencies : true"
+          new-string: "useHiltDependencies : ${{ matrix.useHiltDependencies }}"
+          file: "buildscripts/setup.gradle"
 
       - name: Set useRoomDependencies
-        uses: jacobtomlinson/gha-find-replace@v3
+        uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
-          find: "useRoomDependencies[ ]+ : true"
-          replace: "useRoomDependencies : ${{ matrix.useRoomDependencies }}"
-          include: "**setup.gradle"
+          old-string: "useRoomDependencies : true"
+          new-string: "useRoomDependencies : ${{ matrix.useRoomDependencies }}"
+          file: "buildscripts/setup.gradle"
 
       - name: Set useRetrofitDependencies
-        uses: jacobtomlinson/gha-find-replace@v3
+        uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
-          find: "useRetrofitDependencies[ ]+ : true"
-          replace: "useRetrofitDependencies : ${{ matrix.useRetrofitDependencies }}"
-          include: "**setup.gradle"
+          old-string: "useRetrofitDependencies : true"
+          new-string: "useRetrofitDependencies : ${{ matrix.useRetrofitDependencies }}"
+          file: "buildscripts/setup.gradle"
 
       - name: Set usePaparazziDependencies
-        uses: jacobtomlinson/gha-find-replace@v3
+        uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
-          find: "usePaparazziDependencies[ ]+ : true"
-          replace: "usePaparazziDependencies : ${{ matrix.usePaparazziDependencies }}"
-          include: "**setup.gradle"
+          old-string: "usePaparazziDependencies : true"
+          new-string: "usePaparazziDependencies : ${{ matrix.usePaparazziDependencies }}"
+          file: "buildscripts/setup.gradle"
 
       - name: Set Up JDK
         uses: actions/setup-java@v4
