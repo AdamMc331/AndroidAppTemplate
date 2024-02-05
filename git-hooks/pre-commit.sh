@@ -22,8 +22,6 @@ echo "$CHANGED_FILES" | while read -r file; do
     fi
 done
 
-echo "Completed ktlint hook."
-
 ######## KTLINT-GRADLE HOOK END ########
 
 echo "Sorting dependencies."
@@ -31,3 +29,15 @@ echo "Sorting dependencies."
 ./gradlew sortDependencies
 
 echo "Completed sorting dependencies."
+
+# Look for any changed files that are gradle, gradle.kts, or toml and git add them.
+# This ensures any files changed by sortDependencies get added to this git commit.
+CHANGED_VERSION_FILES="$(git --no-pager diff --name-status --no-color --cached | awk '$1 != "D" && $2 ~ /\.gradle|\.toml|\.gradle.kts/ { print $2}')"
+
+echo "$CHANGED_VERSION_FILES" | while read -r file; do
+    if [ -f $file ]; then
+        git add $file
+    fi
+done
+
+echo "Completed pre-commit hook."
