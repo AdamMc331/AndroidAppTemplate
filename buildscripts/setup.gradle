@@ -72,6 +72,17 @@ task renameAppPackage(type: Copy) {
         )
     }
 
+    rename { fileName ->
+        if (fileName.contains("${renameConfig.templateApplicationClassName}")) {
+            fileName.replace(
+                    "${renameConfig.templateApplicationClassName}",
+                    "${renameConfig.newApplicationClassName}",
+            )
+        } else {
+            fileName
+        }
+    }
+
     doLast {
         delete(startingDirectory)
     }
