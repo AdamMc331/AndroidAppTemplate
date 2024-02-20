@@ -147,6 +147,7 @@ task keepOrRemoveDependencies {
             if (renameConfig.useHiltDependencies != true) {
                 println("Removing hilt dependencies")
                 removeTextFromFile(fileName, "hilt")
+                removeTextFromFile(fileName, "Hilt")
             }
 
             if (renameConfig.useRoomDependencies != true) {
