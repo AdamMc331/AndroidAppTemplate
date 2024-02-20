@@ -1,14 +1,16 @@
 def renameConfig = [
-        templateName             : "template",
-        templateAppId            : "template.app.id",
-        templateMaterialThemeName: "TemplateTheme",
-        newPackage               : "domain.yourname.app",
-        newProjectName           : "Your Project",
-        newMaterialThemeName     : "MyMaterialTheme",
-        useHiltDependencies      : true,
-        useRoomDependencies      : true,
-        useRetrofitDependencies  : true,
-        usePaparazziDependencies : true,
+        templateName                : "template",
+        templateAppId               : "template.app.id",
+        templateMaterialThemeName   : "TemplateTheme",
+        templateApplicationClassName: "TemplateApp",
+        newPackage                  : "domain.yourname.app",
+        newProjectName              : "Your Project",
+        newMaterialThemeName        : "MyMaterialTheme",
+        newApplicationClassName     : "MyApp",
+        useHiltDependencies         : true,
+        useRoomDependencies         : true,
+        useRetrofitDependencies     : true,
+        usePaparazziDependencies    : true,
 ]
 
 task deleteSetupCode() {
@@ -62,6 +64,14 @@ task renameAppPackage(type: Copy) {
         )
     }
 
+    // Replace application class references
+    filter { line ->
+        line.replaceAll(
+                "${renameConfig.templateApplicationClassName}",
+                "${renameConfig.newApplicationClassName}",
+        )
+    }
+
     doLast {
         delete(startingDirectory)
     }
@@ -76,6 +86,12 @@ task replaceTemplateReferences {
                 "${rootDir}/app/src/main/AndroidManifest.xml",
                 "${renameConfig.templateName}.MainActivity",
                 "${renameConfig.newPackage}.MainActivity",
+        )
+
+        replaceTextInFile(
+                "${rootDir}/app/src/main/AndroidManifest.xml",
+                ".${renameConfig.templateApplicationClassName}",
+                ".${renameConfig.newApplicationClassName}",
         )
 
         replaceTextInFile(
