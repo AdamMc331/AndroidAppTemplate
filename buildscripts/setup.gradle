@@ -1,14 +1,16 @@
 def renameConfig = [
-        templateName             : "template",
-        templateAppId            : "template.app.id",
-        templateMaterialThemeName: "TemplateTheme",
-        newPackage               : "domain.yourname.app",
-        newProjectName           : "Your Project",
-        newMaterialThemeName     : "MyMaterialTheme",
-        useHiltDependencies      : true,
-        useRoomDependencies      : true,
-        useRetrofitDependencies  : true,
-        usePaparazziDependencies : true,
+        templateName                : "template",
+        templateAppId               : "template.app.id",
+        templateMaterialThemeName   : "TemplateTheme",
+        templateApplicationClassName: "TemplateApp",
+        newPackage                  : "domain.yourname.app",
+        newProjectName              : "Your Project",
+        newMaterialThemeName        : "MyMaterialTheme",
+        newApplicationClassName     : "MyApp",
+        useHiltDependencies         : true,
+        useRoomDependencies         : true,
+        useRetrofitDependencies     : true,
+        usePaparazziDependencies    : true,
 ]
 
 task deleteSetupCode() {
@@ -62,6 +64,25 @@ task renameAppPackage(type: Copy) {
         )
     }
 
+    // Replace application class references
+    filter { line ->
+        line.replaceAll(
+                "${renameConfig.templateApplicationClassName}",
+                "${renameConfig.newApplicationClassName}",
+        )
+    }
+
+    rename { fileName ->
+        if (fileName.contains("${renameConfig.templateApplicationClassName}")) {
+            fileName.replace(
+                    "${renameConfig.templateApplicationClassName}",
+                    "${renameConfig.newApplicationClassName}",
+            )
+        } else {
+            fileName
+        }
+    }
+
     doLast {
         delete(startingDirectory)
     }
@@ -76,6 +97,12 @@ task replaceTemplateReferences {
                 "${rootDir}/app/src/main/AndroidManifest.xml",
                 "${renameConfig.templateName}.MainActivity",
                 "${renameConfig.newPackage}.MainActivity",
+        )
+
+        replaceTextInFile(
+                "${rootDir}/app/src/main/AndroidManifest.xml",
+                ".${renameConfig.templateApplicationClassName}",
+                ".${renameConfig.newApplicationClassName}",
         )
 
         replaceTextInFile(
@@ -113,12 +140,14 @@ task keepOrRemoveDependencies {
                 "${rootDir}/build.gradle.kts",
                 "${rootDir}/app/build.gradle.kts",
                 "${rootDir}/gradle/libs.versions.toml",
+                "${rootDir}/app/src/main/java/template/TemplateApp.kt",
         ]
 
         filesWithDependencies.each { fileName ->
             if (renameConfig.useHiltDependencies != true) {
                 println("Removing hilt dependencies")
                 removeTextFromFile(fileName, "hilt")
+                removeTextFromFile(fileName, "Hilt")
             }
 
             if (renameConfig.useRoomDependencies != true) {
