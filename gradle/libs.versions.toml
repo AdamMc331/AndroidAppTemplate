@@ -1,5 +1,4 @@
 [versions]
-accompanist = "0.34.0"
 activityCompose = "1.8.2"
 androidxTest = "1.1.5"
 appCompat = "1.6.1"
@@ -28,7 +27,6 @@ room = "2.6.1"
 sortDependencies = "0.4"
 
 [libraries]
-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "ktxCore" }
