@@ -16,24 +16,6 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
-
-    // Currently overriding the ktlint version to 1.0.1, can remove in the future when kotlinter
-    // is updated: https://github.com/jeremymailen/kotlinter-gradle#custom-ktlint-version
-    configurations.classpath {
-        resolutionStrategy {
-            force(
-                "com.pinterest.ktlint:ktlint-rule-engine:${libs.versions.ktlint.get()}",
-                "com.pinterest.ktlint:ktlint-rule-engine-core:${libs.versions.ktlint.get()}",
-                "com.pinterest.ktlint:ktlint-cli-reporter-core:${libs.versions.ktlint.get()}",
-                "com.pinterest.ktlint:ktlint-cli-reporter-checkstyle:${libs.versions.ktlint.get()}",
-                "com.pinterest.ktlint:ktlint-cli-reporter-json:${libs.versions.ktlint.get()}",
-                "com.pinterest.ktlint:ktlint-cli-reporter-html:${libs.versions.ktlint.get()}",
-                "com.pinterest.ktlint:ktlint-cli-reporter-plain:${libs.versions.ktlint.get()}",
-                "com.pinterest.ktlint:ktlint-cli-reporter-sarif:${libs.versions.ktlint.get()}",
-                "com.pinterest.ktlint:ktlint-ruleset-standard:${libs.versions.ktlint.get()}",
-            )
-        }
-    }
 }
 
 plugins {
