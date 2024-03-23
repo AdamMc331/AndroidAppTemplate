@@ -6,10 +6,7 @@ jobs:
   rename-template:
     strategy:
       matrix:
-        useHiltDependencies: [true, false]
-        useRoomDependencies: [true, false]
-        useRetrofitDependencies: [true, false]
-        usePaparazziDependencies: [true, false]
+        keepCustomizableDependencies: [true, false]
 
     runs-on: macos-14
     steps:
@@ -17,19 +14,19 @@ jobs:
 
       - name: Set useHiltDependencies
         run: |
-          sed -i '' 's/useHiltDependencies.* : true/useHiltDependencies : ${{ matrix.useHiltDependencies }}/g' buildscripts/setup.gradle
+          sed -i '' 's/useHiltDependencies.* : true/useHiltDependencies : ${{ matrix.keepCustomizableDependencies }}/g' buildscripts/setup.gradle
 
       - name: Set useRoomDependencies
         run: |
-          sed -i '' 's/useRoomDependencies.* : true/useRoomDependencies : ${{ matrix.useRoomDependencies }}/g' buildscripts/setup.gradle
+          sed -i '' 's/useRoomDependencies.* : true/useRoomDependencies : ${{ matrix.keepCustomizableDependencies }}/g' buildscripts/setup.gradle
 
       - name: Set useRetrofitDependencies
         run: |
-          sed -i '' 's/useRetrofitDependencies.* : true/useRetrofitDependencies : ${{ matrix.useRetrofitDependencies }}/g' buildscripts/setup.gradle
+          sed -i '' 's/useRetrofitDependencies.* : true/useRetrofitDependencies : ${{ matrix.keepCustomizableDependencies }}/g' buildscripts/setup.gradle
 
       - name: Set usePaparazziDependencies
         run: |
-          sed -i '' 's/usePaparazziDependencies.* : true/usePaparazziDependencies : ${{ matrix.usePaparazziDependencies }}/g' buildscripts/setup.gradle
+          sed -i '' 's/usePaparazziDependencies.* : true/usePaparazziDependencies : ${{ matrix.keepCustomizableDependencies }}/g' buildscripts/setup.gradle
 
       - name: Set Up JDK
         uses: actions/setup-java@v4
