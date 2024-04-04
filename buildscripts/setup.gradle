@@ -11,6 +11,7 @@ def renameConfig = [
         useRoomDependencies         : true,
         useRetrofitDependencies     : true,
         usePaparazziDependencies    : true,
+        useRenovateDependencies     : true,
 ]
 
 task deleteSetupCode() {
@@ -24,7 +25,11 @@ task deleteSetupCode() {
         removeTextFromFile("${rootDir}/build.gradle.kts", "setup.gradle")
         delete(templateChangeWorkflowFile)
         delete(setupGradle)
-        delete(renovateFile)
+
+        if (renameConfig.useRenovateDependencies != true) {
+            println("Removing renovate dependencies")
+            delete(renovateFile)
+        }
     }
 }
 
