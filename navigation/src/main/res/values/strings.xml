@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tab_one">One</string>
+    <string name="tab_two">Two</string>
+    <string name="tab_three">Three</string>
+</resources>
