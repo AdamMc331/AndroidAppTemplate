@@ -8,14 +8,14 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
 /**
+ * TEMPLATE USERS: Replace these enum values with the one specific to your application
+ *  after cloning this template.
+ *
  * An enumeration of all base navigation options for the user to see
  * on the main screen of the app.
  *
  * @property[icon] A reference to the [ImageVector] to display for this tab.
  * @property[textRes] A [StringRes] reference for the display text of this tab.
- *
- * TODO: Replace these enum values with the one specific to your application
- *  after cloning this template.
  */
 enum class NavigationTab(
     val icon: ImageVector,
