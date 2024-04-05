@@ -1,9 +1,8 @@
 package template.navigation
 
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,31 +10,32 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 
 /**
- * Given a collection of [navigationItems], render a [NavigationBar] which is a standard
- * bottom navigation used on compact screen sizes.
+ * Given a collection of [navigationItems], render them inside a [NavigationRail]
+ * which appears on the side of the device in medium size screens like foldables
+ * and small tablets.
  */
 @Composable
-fun BottomNavigationBar(
+fun SideNavigationRail(
     navigationItems: List<NavigationTabDisplayModel>,
     modifier: Modifier = Modifier,
 ) {
-    NavigationBar(
+    NavigationRail(
         modifier = modifier,
     ) {
         navigationItems.forEach { navigationItem ->
-            BottomNavigationItem(navigationItem)
+            SideNavigationRailItem(navigationItem)
         }
     }
 }
 
 /**
- * Creates a [NavigationBarItem] from the supplied [navigationItem].
+ * Renders a [NavigationRailItem] for the supplied [navigationItem].
  */
 @Composable
-private fun RowScope.BottomNavigationItem(
+private fun SideNavigationRailItem(
     navigationItem: NavigationTabDisplayModel,
 ) {
-    NavigationBarItem(
+    NavigationRailItem(
         icon = {
             Icon(
                 imageVector = navigationItem.tab.icon,
@@ -52,9 +52,9 @@ private fun RowScope.BottomNavigationItem(
     )
 }
 
-@Preview
 @Composable
-private fun BottomNavigationPreview() {
+@Preview
+private fun NavigationRailPreview() {
     val navigationItems = listOf(
         NavigationTabDisplayModel(
             tab = NavigationTab.ONE,
@@ -73,5 +73,5 @@ private fun BottomNavigationPreview() {
         ),
     )
 
-    BottomNavigationBar(navigationItems = navigationItems)
+    SideNavigationRail(navigationItems = navigationItems)
 }
