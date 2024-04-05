@@ -55,23 +55,7 @@ private fun RowScope.BottomNavigationItem(
 @Preview
 @Composable
 private fun BottomNavigationPreview() {
-    val navigationItems = listOf(
-        NavigationTabDisplayModel(
-            tab = NavigationTab.ONE,
-            selected = true,
-            onClick = {},
-        ),
-        NavigationTabDisplayModel(
-            tab = NavigationTab.TWO,
-            selected = false,
-            onClick = {},
-        ),
-        NavigationTabDisplayModel(
-            tab = NavigationTab.THREE,
-            selected = false,
-            onClick = {},
-        ),
+    BottomNavigationBar(
+        navigationItems = previewTabDisplayModels(),
     )
-
-    BottomNavigationBar(navigationItems = navigationItems)
 }

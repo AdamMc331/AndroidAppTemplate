@@ -55,23 +55,7 @@ private fun SideNavigationRailItem(
 @Composable
 @Preview
 private fun NavigationRailPreview() {
-    val navigationItems = listOf(
-        NavigationTabDisplayModel(
-            tab = NavigationTab.ONE,
-            selected = true,
-            onClick = {},
-        ),
-        NavigationTabDisplayModel(
-            tab = NavigationTab.TWO,
-            selected = false,
-            onClick = {},
-        ),
-        NavigationTabDisplayModel(
-            tab = NavigationTab.THREE,
-            selected = false,
-            onClick = {},
-        ),
+    SideNavigationRail(
+        navigationItems = previewTabDisplayModels(),
     )
-
-    SideNavigationRail(navigationItems = navigationItems)
 }

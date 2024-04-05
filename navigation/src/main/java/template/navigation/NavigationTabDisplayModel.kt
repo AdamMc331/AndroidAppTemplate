@@ -13,3 +13,27 @@ data class NavigationTabDisplayModel(
     val selected: Boolean,
     val onClick: () -> Unit,
 )
+
+/**
+ * Helper function to return a list of [NavigationTabDisplayModel] entities
+ * for Compose previews.
+ */
+internal fun previewTabDisplayModels(): List<NavigationTabDisplayModel> {
+    return listOf(
+        NavigationTabDisplayModel(
+            tab = NavigationTab.ONE,
+            selected = true,
+            onClick = {},
+        ),
+        NavigationTabDisplayModel(
+            tab = NavigationTab.TWO,
+            selected = false,
+            onClick = {},
+        ),
+        NavigationTabDisplayModel(
+            tab = NavigationTab.THREE,
+            selected = false,
+            onClick = {},
+        ),
+    )
+}
