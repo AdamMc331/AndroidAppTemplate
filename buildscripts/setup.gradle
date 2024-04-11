@@ -15,14 +15,6 @@ def renameConfig = [
         useDynamicNavigation        : true,
 ]
 
-task keepOrRemoveNavigationModule() {
-    if (renameConfig.useDynamicNavigation) {
-        dependsOn(renameNavigationModule)
-    } else {
-        dependsOn(deleteNavigationModule)
-    }
-}
-
 task deleteNavigationModule() {
     def navigationModulePath = "${rootDir}/navigation"
     def appGradle = "${rootDir}/app/build.gradle.kts"
@@ -84,6 +76,14 @@ task renameNavigationModule(type: Copy) {
 
     doLast {
         delete(startingDirectory)
+    }
+}
+
+task keepOrRemoveNavigationModule() {
+    if (renameConfig.useDynamicNavigation) {
+        dependsOn(renameNavigationModule)
+    } else {
+        dependsOn(deleteNavigationModule)
     }
 }
 
