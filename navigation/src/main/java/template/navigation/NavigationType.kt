@@ -1,5 +1,12 @@
 package template.navigation
 
+import android.app.Activity
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.runtime.Composable
+
 /**
  * This is an enumeration of all of the different ways we can structure navigation in the application.
  *
@@ -14,4 +21,31 @@ enum class NavigationType {
     BOTTOM_NAVIGATION,
     NAVIGATION_RAIL,
     PERMANENT_NAVIGATION_DRAWER,
+    ;
+    
+    companion object {
+        @Composable
+        @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+        fun fromActivity(activity: Activity): NavigationType {
+            val windowSizeClass = calculateWindowSizeClass(activity)
+
+            return when (windowSizeClass.widthSizeClass) {
+                WindowWidthSizeClass.Compact -> {
+                    BOTTOM_NAVIGATION
+                }
+
+                WindowWidthSizeClass.Medium -> {
+                    NAVIGATION_RAIL
+                }
+
+                WindowWidthSizeClass.Expanded -> {
+                    PERMANENT_NAVIGATION_DRAWER
+                }
+
+                else -> {
+                    BOTTOM_NAVIGATION
+                }
+            }
+        }
+    }
 }

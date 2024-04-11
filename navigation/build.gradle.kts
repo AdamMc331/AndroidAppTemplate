@@ -45,6 +45,7 @@ android {
 dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material)
+    implementation(libs.compose.material.window)
     implementation(libs.compose.material.icons.extended)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
