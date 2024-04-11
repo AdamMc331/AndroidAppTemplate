@@ -12,6 +12,7 @@ def renameConfig = [
         useRetrofitDependencies     : true,
         usePaparazziDependencies    : true,
         useRenovateDependencies     : true,
+        useDynamicNavigation        : true,
 ]
 
 task deleteSetupCode() {
