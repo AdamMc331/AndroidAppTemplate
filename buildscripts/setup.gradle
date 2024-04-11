@@ -16,18 +16,22 @@ def renameConfig = [
 ]
 
 task keepOrRemoveNavigationModule() {
+    if (renameConfig.useDynamicNavigation) {
+        dependsOn(renameNavigationModule)
+    } else {
+        dependsOn(deleteNavigationModule)
+    }
+}
+
+task deleteNavigationModule() {
     def navigationModulePath = "${rootDir}/navigation"
     def appGradle = "${rootDir}/app/build.gradle.kts"
     def settingsGradle = "${rootDir}/settings.gradle.kts"
 
     doLast {
-        if (renameConfig.useDynamicNavigation) {
-            // TODO: Rename the module packages.
-        } else {
-            delete(navigationModulePath)
-            removeTextFromFile(appGradle, "navigation")
-            removeTextFromFile(settingsGradle, "navigation")
-        }
+        delete(navigationModulePath)
+        removeTextFromFile(appGradle, "navigation")
+        removeTextFromFile(settingsGradle, "navigation")
     }
 }
 
@@ -47,6 +51,39 @@ task deleteSetupCode() {
             println("Removing renovate dependencies")
             delete(renovateFile)
         }
+    }
+}
+
+task renameNavigationModule(type: Copy) {
+    description "Renames the template package in the navigation module."
+    group null
+
+    def newPackage = "${renameConfig.newPackage}"
+    def newPackageAsDirectory = newPackage.replaceAll("\\.", "/")
+    def startingDirectory = "${rootDir}/app/src/main/java/${renameConfig.templateName}/navigation"
+    def endingDirectory = "${rootDir}/app/src/main/java/${newPackageAsDirectory}/navigation"
+
+    from(startingDirectory)
+    into(endingDirectory)
+
+    // Replace package statements
+    filter { line ->
+        line.replaceAll(
+                "package ${renameConfig.templateName}.navigation",
+                "package ${renameConfig.newPackage}.navigation"
+        )
+    }
+
+    // Replace import statements
+    filter { line ->
+        line.replaceAll(
+                "import ${renameConfig.templateName}.navigation",
+                "import ${renameConfig.newPackage}.navigation"
+        )
+    }
+
+    doLast {
+        delete(startingDirectory)
     }
 }
 
@@ -196,6 +233,7 @@ task renameTemplate {
     group "Template Setup"
 
     dependsOn(
+            keepOrRemoveNavigationModule,
             keepOrRemoveDependencies,
             renameAppPackage,
             replaceTemplateReferences,
