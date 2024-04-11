@@ -24,6 +24,11 @@ enum class NavigationType {
     ;
     
     companion object {
+        /**
+         * This function will look up a [WindowWidthSizeClass] for the given [activity], and then
+         * based on the width of that activity, will provide a [NavigationType] to determine
+         * the navigation solution to show to the user.
+         */
         @Composable
         @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
         fun fromActivity(activity: Activity): NavigationType {

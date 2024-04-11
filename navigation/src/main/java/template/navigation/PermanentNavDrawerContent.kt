@@ -24,13 +24,12 @@ private val TITLE_PADDING = 16.dp
  * Given a collection of [navigationItems], render them inside a [PermanentDrawerSheet]
  * which will be used  as a fix set of navigation items on the side of the screen. Used
  * when we have a large screen width such as larger tablets.
- *
- * @see[PermanentNavDrawerContainer]
  */
 @Composable
 fun PermanentNavDrawerContent(
     navigationItems: List<NavigationTabDisplayModel>,
     modifier: Modifier = Modifier,
+    drawerTitle: String = "APP_NAME",
 ) {
     PermanentDrawerSheet(
         modifier = modifier.sizeIn(
@@ -46,7 +45,7 @@ fun PermanentNavDrawerContent(
             Text(
                 modifier = Modifier
                     .padding(TITLE_PADDING),
-                text = "APP_NAME".uppercase(),
+                text = drawerTitle,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.primary,
             )

@@ -7,8 +7,6 @@ package template.navigation
  * @property[tab] The [NavigationTab] currently being viewed by the user.
  * @property[selected] If true, this navigation item will show a selected state.
  * @property[onClick] A callback to trigger when the user taps on this navigation item.
- *
- * NOTE FOR ADAM: Should we keep [tab] or just use the titleRes & icon in this display model?
  */
 data class NavigationTabDisplayModel(
     val tab: NavigationTab,

@@ -55,7 +55,7 @@ private fun BottomNavigationContainer(
 ) {
     Column(
         modifier
-            .fillMaxSize(), // Should we use this, or should this also belong at call site
+            .fillMaxSize(),
     ) {
         Box(
             modifier = Modifier
@@ -78,7 +78,7 @@ private fun NavigationRailContainer(
 ) {
     Row(
         modifier
-            .fillMaxSize(), // Should we use this, or should this also belong at call site
+            .fillMaxSize(),
     ) {
         SideNavigationRail(
             navigationItems = navigationItems,
