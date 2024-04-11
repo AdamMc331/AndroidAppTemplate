@@ -18,7 +18,7 @@ val tabDisplayModels = listOf(
         tab = NavigationTab.ONE, // Enum value
         selected = (selectedTab == NavigationTab.ONE), // Selected if state equals enum value
         onClick = {
-            selectedTab = SelectedTab.ONE // On click, set to our enum value
+            selectedTab = SelectedTab.ONE // On click, set state to our enum value
         },
     ),
     // Repeat for other tabs
@@ -49,6 +49,8 @@ class MainActivity : ComponentActivity() {
                     navigationType = NavigationType.from(this),
                 ) {
                     // Render content based on selectedTab
+                    // Ideally you should pass `Modifier.fillMaxSize()` with your content to 
+                    // take up all available space. Or modify DynamicNavigationContainer to do this for you. 
                 }
             }
         }
