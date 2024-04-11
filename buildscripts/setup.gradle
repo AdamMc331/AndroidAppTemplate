@@ -17,12 +17,16 @@ def renameConfig = [
 
 task keepOrRemoveNavigationModule() {
     def navigationModulePath = "${rootDir}/navigation"
+    def appGradle = "${rootDir}/app/build.gradle"
+    def settingsGradle = "${rootDir}/settings.gradle"
 
     doLast {
         if (renameConfig.useDynamicNavigation) {
             // TODO: Rename the module packages.
         } else {
             delete(navigationModulePath)
+            removeTextFromFile(appGradle, "navigation")
+            removeTextFromFile(settingsGradle, "navigation")
         }
     }
 }
