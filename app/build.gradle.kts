@@ -65,6 +65,7 @@ dependencies {
     kspAndroidTest(libs.hilt.android.compiler)
 
     implementation(platform(libs.compose.bom))
+    implementation(project(":navigation"))
     implementation(libs.android.material)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
