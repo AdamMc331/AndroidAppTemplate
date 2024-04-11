@@ -76,6 +76,12 @@ task renameNavigationModule(type: Copy) {
     }
 
     doLast {
+        replaceTextInFile(
+                "${rootDir}/navigation/build.gradle.kts",
+                "namespace = \"${renameConfig.templateName}\".navigation",
+                "namespace = \"${renameConfig.newPackage}\".navigation",
+        )
+
         delete(baseStartingDirectory)
     }
 }
