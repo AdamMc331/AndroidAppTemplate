@@ -32,6 +32,10 @@ jobs:
         run: |
           sed -i '' 's/useRenovateDependencies.* : true/useRenovateDependencies : ${{ matrix.keepCustomizableDependencies }}/g' buildscripts/setup.gradle
 
+      - name: Set useDynamicNavigation
+        run: |
+          sed -i '' 's/useDynamicNavigation.* : true/useDynamicNavigation : ${{ matrix.keepCustomizableDependencies }}/g' buildscripts/setup.gradle
+
       - name: Set Up JDK
         uses: actions/setup-java@v4
         with:

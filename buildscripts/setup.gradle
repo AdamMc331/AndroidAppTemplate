@@ -12,13 +12,13 @@ def renameConfig = [
         useRetrofitDependencies     : true,
         usePaparazziDependencies    : true,
         useRenovateDependencies     : true,
-        useDynamicNavigation        : false,
+        useDynamicNavigation        : true,
 ]
 
 task keepOrRemoveNavigationModule() {
     def navigationModulePath = "${rootDir}/navigation"
-    def appGradle = "${rootDir}/app/build.gradle"
-    def settingsGradle = "${rootDir}/settings.gradle"
+    def appGradle = "${rootDir}/app/build.gradle.kts"
+    def settingsGradle = "${rootDir}/settings.gradle.kts"
 
     doLast {
         if (renameConfig.useDynamicNavigation) {
