@@ -12,8 +12,20 @@ def renameConfig = [
         useRetrofitDependencies     : true,
         usePaparazziDependencies    : true,
         useRenovateDependencies     : true,
-        useDynamicNavigation        : true,
+        useDynamicNavigation        : false,
 ]
+
+task keepOrRemoveNavigationModule() {
+    def navigationModulePath = "${rootDir}/navigation"
+
+    doLast {
+        if (renameConfig.useDynamicNavigation) {
+            // TODO: Rename the module packages.
+        } else {
+            delete(navigationModulePath)
+        }
+    }
+}
 
 task deleteSetupCode() {
     def workflowsFolder = "${rootDir}/.github/workflows"
