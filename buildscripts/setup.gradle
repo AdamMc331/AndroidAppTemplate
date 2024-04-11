@@ -52,7 +52,8 @@ task renameNavigationModule(type: Copy) {
 
     def newPackage = "${renameConfig.newPackage}"
     def newPackageAsDirectory = newPackage.replaceAll("\\.", "/")
-    def startingDirectory = "${rootDir}/navigation/src/main/java/${renameConfig.templateName}/navigation"
+    def baseStartingDirectory = "${rootDir}/navigation/src/main/java/${renameConfig.templateName}"
+    def startingDirectory = "$baseStartingDirectory/navigation"
     def endingDirectory = "${rootDir}/navigation/src/main/java/${newPackageAsDirectory}/navigation"
 
     from(startingDirectory)
@@ -75,7 +76,7 @@ task renameNavigationModule(type: Copy) {
     }
 
     doLast {
-        delete(startingDirectory)
+        delete(baseStartingDirectory)
     }
 }
 
