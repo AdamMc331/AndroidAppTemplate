@@ -8,10 +8,21 @@ import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.movableContentOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 
+/**
+ * This is the main entry point to dynamic navigation. Based on the [navigationType] supplied, we'll render
+ * a specific navigation component to show the [navigationItems]. The space not used by the navigation component
+ * will be used to render the [appContent].
+ *
+ * Note that it's important we reference [movableContentOf], as this ensures the lifecycle of [appContent] is maintained,
+ * even if the [navigationType] changes.
+ * See also: https://android.googlesource.com/platform/frameworks/support/+/androidx-main/compose/docs/compose-component-api-guidelines.md#lifecycle-expectations-for-slot-parameters
+ */
 @Composable
 fun DynamicNavigationContainer(
     navigationItems: List<NavigationTabDisplayModel>,
@@ -19,15 +30,17 @@ fun DynamicNavigationContainer(
     modifier: Modifier = Modifier,
     appContent: @Composable () -> Unit,
 ) {
+    val content = remember(appContent) { movableContentOf(appContent) }
+
     when (navigationType) {
         NavigationType.BOTTOM_NAVIGATION -> {
-            BottomNavigationContainer(navigationItems, modifier, appContent)
+            BottomNavigationContainer(navigationItems, modifier, content)
         }
         NavigationType.NAVIGATION_RAIL -> {
-            NavigationRailContainer(navigationItems, modifier, appContent)
+            NavigationRailContainer(navigationItems, modifier, content)
         }
         NavigationType.PERMANENT_NAVIGATION_DRAWER -> {
-            PermanentNavigationDrawerContainer(navigationItems, modifier, appContent)
+            PermanentNavigationDrawerContainer(navigationItems, modifier, content)
         }
     }
 }
