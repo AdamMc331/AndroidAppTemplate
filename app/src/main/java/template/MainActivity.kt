@@ -10,13 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import template.navigation.DynamicNavigationContainer
-import template.navigation.NavigationTab
-import template.navigation.NavigationTabDisplayModel
-import template.navigation.NavigationType
 import template.theme.TemplateTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,36 +21,6 @@ class MainActivity : ComponentActivity() {
             ConfigureEdgeToEdgeWindow()
 
             TemplateTheme {
-                Surface(
-                    color = MaterialTheme.colorScheme.background,
-                ) {
-                    Greeting("Android")
-                }
-            }
-        }
-    }
-
-    @Composable
-    private fun AdaptiveNavigationExample() {
-        TemplateTheme {
-            var selectedTab by rememberSaveable {
-                mutableStateOf(NavigationTab.ONE)
-            }
-
-            val tabs = NavigationTab.entries.map { tab ->
-                NavigationTabDisplayModel(
-                    tab = tab,
-                    selected = (selectedTab == tab),
-                    onClick = {
-                        selectedTab = tab
-                    },
-                )
-            }
-
-            DynamicNavigationContainer(
-                navigationItems = tabs,
-                navigationType = NavigationType.fromActivity(activity = this),
-            ) {
                 Surface(
                     color = MaterialTheme.colorScheme.background,
                 ) {
