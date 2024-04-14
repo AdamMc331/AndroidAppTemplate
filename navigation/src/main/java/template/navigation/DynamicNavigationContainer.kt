@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 
+@Suppress("MaxLineLength") // Doc link too long to truncate
 /**
  * This is the main entry point to dynamic navigation. Based on the [navigationType] supplied, we'll render
  * a specific navigation component to show the [navigationItems]. The space not used by the navigation component
