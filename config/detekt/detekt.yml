@@ -45,6 +45,8 @@ output-reports:
   # - 'TxtOutputReport'
   # - 'XmlOutputReport'
   # - 'HtmlOutputReport'
+  # - 'MdOutputReport'
+  # - 'sarif'
 
 comments:
   active: true
@@ -83,7 +85,7 @@ complexity:
     threshold: 10
     includeStaticDeclarations: false
     includePrivateDeclarations: false
-  ComplexMethod:
+  CyclomaticComplexMethod:
     active: true
     threshold: 15
     ignoreSingleWhenExpression: false
@@ -255,7 +257,6 @@ naming:
     parameterPattern: '[a-z][A-Za-z0-9]*'
     privateParameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
   EnumNaming:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
@@ -277,14 +278,12 @@ naming:
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     functionPattern: '([a-z][a-zA-Z0-9]*)|(`.*`)'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
     ignoreAnnotated: ['Composable']
   FunctionParameterNaming:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     parameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
   InvalidPackageDeclaration:
     active: false
     excludes: ['*.kts']
@@ -330,7 +329,6 @@ naming:
     variablePattern: '[a-z][A-Za-z0-9]*'
     privateVariablePattern: '(_)?[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
 
 performance:
   active: true
@@ -355,8 +353,6 @@ potential-bugs:
     active: false
   DoubleMutabilityForCollection:
     active: false
-  DuplicateCaseInWhenExpression:
-    active: true
   EqualsAlwaysReturnsTrueOrFalse:
     active: true
   EqualsWithHashCodeExist:
@@ -369,7 +365,7 @@ potential-bugs:
     active: false
   IgnoredReturnValue:
     active: false
-    restrictToAnnotatedMethods: true
+    restrictToConfig: true
     returnValueAnnotations: ['*.CheckReturnValue', '*.CheckResult']
   ImplicitDefaultLocale:
     active: true
@@ -385,17 +381,12 @@ potential-bugs:
   LateinitUsage:
     active: false
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    excludeAnnotatedProperties: []
+    ignoreAnnotated: []
     ignoreOnClassesPattern: ''
   MapGetWithNotNullAssertionOperator:
     active: false
-  MissingWhenCase:
-    active: true
-    allowElseExpression: true
   NullableToStringCall:
     active: false
-  RedundantElseInWhen:
-    active: true
   UnconditionalJumpStatementInLoop:
     active: false
   UnnecessaryNotNullOperator:
@@ -419,13 +410,21 @@ potential-bugs:
 
 style:
   active: true
+  BracesOnIfStatements:
+    active: false
+    singleLine: 'never'
+    multiLine: 'always'
+  BracesOnWhenStatements:
+    active: false
+    singleLine: 'necessary'
+    multiLine: 'consistent'
   ClassOrdering:
     active: false
   CollapsibleIfStatements:
     active: false
   DataClassContainsFunctions:
     active: false
-    conversionFunctionPrefix: 'to'
+    conversionFunctionPrefix: ['to']
   DataClassShouldBeImmutable:
     active: false
   DestructuringDeclarationWithTooManyEntries:
@@ -444,7 +443,7 @@ style:
     includeLineWrapping: false
   ForbiddenComment:
     active: true
-    values: ['TODO:', 'FIXME:', 'STOPSHIP:']
+    comments: ['TODO:', 'FIXME:', 'STOPSHIP:']
     allowedPatterns: ''
   ForbiddenImport:
     active: false
@@ -452,11 +451,13 @@ style:
     forbiddenPatterns: ''
   ForbiddenMethodCall:
     active: false
-    methods: ['kotlin.io.println', 'kotlin.io.print']
-  ForbiddenPublicDataClass:
-    active: true
-    excludes: ['**']
-    ignorePackages: ['*.internal', '*.internal.*']
+    methods:
+      - reason: 'print does not allow you to configure the output stream. Use a logger instead.'
+        value: 'kotlin.io.print'
+      - reason: 'println does not allow you to configure the output stream. Use a logger instead.'
+        value: 'kotlin.io.println'
+      - reason: 'using `BigDecimal.<init>(kotlin.Double)` can result in unexpected float point precision behavior. Use `BigDecimal.valueOf(kotlin.Double)` or `BigDecimal.<init>(kotlin.String)` instead.'
+        value: 'java.math.BigDecimal.<init>(kotlin.Double)'
   ForbiddenVoid:
     active: false
     ignoreOverridden: false
@@ -465,14 +466,8 @@ style:
     active: true
     ignoreOverridableFunction: true
     ignoreActualFunction: true
-    excludedFunctions: 'describeContents'
-    excludeAnnotatedFunction: ['dagger.Provides']
-  LibraryCodeMustSpecifyReturnType:
-    active: true
-    excludes: ['**']
-  LibraryEntitiesShouldNotBePublic:
-    active: true
-    excludes: ['**']
+    excludedFunctions: ['describeContents']
+    ignoreAnnotated: ['dagger.Provides']
   LoopWithTooManyJumpStatements:
     active: true
     maxJumpCount: 1
@@ -491,8 +486,6 @@ style:
     ignoreRanges: false
     ignoreExtensionFunctions: true
     ignoreAnnotated: ['Preview']
-  MandatoryBracesIfStatements:
-    active: false
   MandatoryBracesLoops:
     active: false
   MaxLineLength:
@@ -519,8 +512,6 @@ style:
     active: true
   OptionalUnit:
     active: false
-  OptionalWhenBraces:
-    active: false
   PreferToOverPairSyntax:
     active: false
   ProtectedMemberInFinalClass:
@@ -534,7 +525,7 @@ style:
   ReturnCount:
     active: true
     max: 2
-    excludedFunctions: 'equals'
+    excludedFunctions: ['equals']
     excludeLabeled: false
     excludeReturnFromLambda: true
     excludeGuardClauses: false
@@ -551,10 +542,10 @@ style:
     active: false
   UnderscoresInNumericLiterals:
     active: false
-    acceptableDecimalLength: 5
+    acceptableLength: 5
   UnnecessaryAbstractClass:
     active: true
-    excludeAnnotatedClasses: ['dagger.Module']
+    ignoreAnnotated: ['dagger.Module']
   UnnecessaryAnnotationUseSiteTarget:
     active: false
   UnnecessaryApply:
@@ -585,7 +576,7 @@ style:
     active: false
   UseDataClass:
     active: false
-    excludeAnnotatedClasses: []
+    ignoreAnnotated: []
     allowVars: false
   UseEmptyCounterpart:
     active: false
