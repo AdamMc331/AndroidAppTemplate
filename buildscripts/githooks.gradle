@@ -1,18 +1,43 @@
-// https://blog.sebastiano.dev/ooga-chaka-git-hooks-to-enforce-code-quality/
-static def isLinuxOrMacOs() {
-    def osName = System.getProperty('os.name').toLowerCase(Locale.ROOT)
-    return osName.contains('linux') || osName.contains('mac os') || osName.contains('macos')
+// https://emmanuelkehinde.io/setting-up-git-pre-commit-pre-push-hook-for-ktlint-check/
+
+import org.apache.tools.ant.taskdefs.condition.Os
+
+static def osSuffix() {
+    def suffix = "macos"
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        suffix = "windows"
+    }
+    return suffix
+}
+
+task copyPreCommitHook(type: Copy) {
+    group 'git hooks'
+
+    def suffix = osSuffix()
+
+    from new File(rootProject.rootDir, "git-hooks/pre-commit-${suffix}.sh")
+    into { new File(rootProject.rootDir, '.git/hooks') }
+    rename("pre-commit-${suffix}.sh", 'pre-commit')
+    fileMode 0775
+}
+
+task copyPrePushHook(type: Copy) {
+    group 'git hooks'
+
+    def suffix = osSuffix()
+
+    from new File(rootProject.rootDir, "git-hooks/pre-push-${suffix}.sh")
+    into { new File(rootProject.rootDir, '.git/hooks') }
+    rename("pre-push-${suffix}.sh", 'pre-push')
+    fileMode 0775
 }
 
 task copyGitHooks(type: Copy) {
     description 'Copies the git hooks from /git-hooks to the .git folder.'
     group 'git hooks'
-    from("${rootDir}/git-hooks/") {
-        include '**/*.sh'
-        rename '(.*).sh', '$1'
-    }
-    into "${rootDir}/.git/hooks"
-    onlyIf { isLinuxOrMacOs() }
+
+    dependsOn copyPreCommitHook
+    dependsOn copyPrePushHook
 }
 
 task installGitHooks(type: Exec) {
@@ -22,7 +47,6 @@ task installGitHooks(type: Exec) {
     commandLine 'chmod'
     args '-R', '+x', '.git/hooks/'
     dependsOn copyGitHooks
-    onlyIf { isLinuxOrMacOs() }
     doLast {
         logger.info('Git hook installed successfully.')
     }
