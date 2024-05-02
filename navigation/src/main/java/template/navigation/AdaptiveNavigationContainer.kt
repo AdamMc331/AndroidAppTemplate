@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Suppress("MaxLineLength") // Doc link too long to truncate
 /**
- * This is the main entry point to dynamic navigation. Based on the [navigationType] supplied, we'll render
+ * This is the main entry point to adaptive navigation. Based on the [navigationType] supplied, we'll render
  * a specific navigation component to show the [navigationItems]. The space not used by the navigation component
  * will be used to render the [appContent].
  *
@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
  * See also: https://android.googlesource.com/platform/frameworks/support/+/androidx-main/compose/docs/compose-component-api-guidelines.md#lifecycle-expectations-for-slot-parameters
  */
 @Composable
-fun DynamicNavigationContainer(
+fun AdaptiveNavigationContainer(
     navigationItems: List<NavigationTabDisplayModel>,
     navigationType: NavigationType,
     modifier: Modifier = Modifier,
@@ -112,7 +112,7 @@ private fun NavigationRailContainer(
 )
 @Composable
 private fun BottomNavigationPreview() {
-    DynamicNavigationContainer(
+    AdaptiveNavigationContainer(
         navigationItems = previewTabDisplayModels(),
         navigationType = NavigationType.BOTTOM_NAVIGATION,
     ) {
@@ -130,7 +130,7 @@ private fun BottomNavigationPreview() {
 )
 @Composable
 private fun NavigationRailPreview() {
-    DynamicNavigationContainer(
+    AdaptiveNavigationContainer(
         navigationItems = previewTabDisplayModels(),
         navigationType = NavigationType.NAVIGATION_RAIL,
     ) {
@@ -148,7 +148,7 @@ private fun NavigationRailPreview() {
 )
 @Composable
 private fun NavigationDrawerPreview() {
-    DynamicNavigationContainer(
+    AdaptiveNavigationContainer(
         navigationItems = previewTabDisplayModels(),
         navigationType = NavigationType.PERMANENT_NAVIGATION_DRAWER,
     ) {

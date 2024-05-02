@@ -1,6 +1,6 @@
-# Dynamic Navigation
+# Adaptive Navigation
 
-The purpose of this module is to provide a holistic solution to dynamic navigation based on the window width of an activity. For compact devices, like phones, we'll show a BottomNavigationBar at the bottom of the screen. For medium size devices, like foldables and small tablets, we'll show a SideNavigationRail on the left side of the screen. For large tablets and bigger screens, we'll show a PermanentNavigationDrawer on the left side of the screen (this looks like an expanded navigation rail). 
+The purpose of this module is to provide a holistic solution to adaptive navigation based on the window width of an activity. For compact devices, like phones, we'll show a BottomNavigationBar at the bottom of the screen. For medium size devices, like foldables and small tablets, we'll show a SideNavigationRail on the left side of the screen. For large tablets and bigger screens, we'll show a PermanentNavigationDrawer on the left side of the screen (this looks like an expanded navigation rail). 
 
 # Setup
 
@@ -29,9 +29,9 @@ val tabDisplayModels = listOf(
 
 The NavigationType enum is all of the unique navigation options available to us. These are based on the width of the activity, but thankfully you don't need to do anything. Just be sure to call `NavigationType.fromActivity()` from within your host activity to get the navigation type that is necessary for your setup. 
 
-## Implementing DynamicNavigationContainer
+## Implementing AdaptiveNavigationContainer
 
-Once you have determined the tabs to display and the navigation type, we can call our DynamicNavigationContainer with the above information:
+Once you have determined the tabs to display and the navigation type, we can call our AdaptiveNavigationContainer with the above information:
 
 ```kotlin
 class MainActivity : ComponentActivity() {
@@ -44,13 +44,13 @@ class MainActivity : ComponentActivity() {
             MyTheme {
                 val tabDisplayModels = // ...
                 
-                DynamicNavigationContainer(
+                AdaptiveNavigationContainer(
                     navigationItems = tabDisplayModels,
                     navigationType = NavigationType.from(this),
                 ) {
                     // Render content based on selectedTab
                     // Ideally you should pass `Modifier.fillMaxSize()` with your content to 
-                    // take up all available space. Or modify DynamicNavigationContainer to do this for you. 
+                    // take up all available space. Or modify AdaptiveNavigationContainer to do this for you. 
                 }
             }
         }

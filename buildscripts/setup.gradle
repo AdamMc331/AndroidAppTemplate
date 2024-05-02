@@ -12,7 +12,7 @@ def renameConfig = [
         useRetrofitDependencies     : true,
         usePaparazziDependencies    : true,
         useRenovateDependencies     : true,
-        useDynamicNavigation        : true,
+        useAdaptiveNavigation        : true,
 ]
 
 task deleteNavigationModule() {
@@ -87,7 +87,7 @@ task renameNavigationModule(type: Copy) {
 }
 
 task keepOrRemoveNavigationModule() {
-    if (renameConfig.useDynamicNavigation) {
+    if (renameConfig.useAdaptiveNavigation) {
         dependsOn(renameNavigationModule)
     } else {
         dependsOn(deleteNavigationModule)
