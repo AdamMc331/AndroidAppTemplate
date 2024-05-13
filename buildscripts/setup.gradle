@@ -31,12 +31,16 @@ task deleteSetupCode() {
     def workflowsFolder = "${rootDir}/.github/workflows"
     def buildscriptsFolder = "${rootDir}/buildscripts"
     def templateChangeWorkflowFile = "$workflowsFolder/template_change_test.yml"
+    def macosHooksWorkflowFile = "$workflowsFolder/install_git_hooks_macos.yml"
+    def windowsHooksWorkflowFile = "$workflowsFolder/install_git_hooks_windows.yml"
     def setupGradle = "$buildscriptsFolder/setup.gradle"
     def renovateFile = "${rootDir}/renovate.json"
 
     doLast {
         removeTextFromFile("${rootDir}/build.gradle.kts", "setup.gradle")
         delete(templateChangeWorkflowFile)
+        delete(macosHooksWorkflowFile)
+        delete(windowsHooksWorkflowFile)
         delete(setupGradle)
 
         if (renameConfig.useRenovateDependencies != true) {
