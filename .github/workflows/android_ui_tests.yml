@@ -8,7 +8,9 @@ on:
 
 jobs:
   android-test:
-    runs-on: macos-latest
+    # At this moment in time, the emulator runner
+    # does not work on macos-14: https://github.com/ReactiveCircus/android-emulator-runner/issues/392#issuecomment-2106167725
+    runs-on: macos-13
     steps:
       - name: Checkout
         uses: actions/checkout@v4
