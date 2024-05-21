@@ -4,16 +4,15 @@ androidxTest = "1.1.5"
 appCompat = "1.6.1"
 compileSdk = "34"
 composeBom = "2024.05.00"
-composeCompiler = "1.5.12"
 detektGradlePlugin = "1.23.6"
 espresso = "3.5.1"
 gradle = "8.4.1"
 gradleVersionsPlugin = "0.51.0"
 hilt = "2.51.1"
 junit = "4.13.2"
-kotlinGradlePlugin = "1.9.23"
+kotlin = "2.0.0"
 kotlinter = "4.3.0"
-ksp = "1.9.23-1.0.20"
+ksp = "2.0.0-1.0.21"
 ktxCore = "1.13.1"
 leakCanary = "2.14"
 lifecycle = "2.8.0"
@@ -52,9 +51,12 @@ hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", ve
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 junit = { module = "junit:junit", version.ref = "junit" }
-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 square-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 square-moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
 square-moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
 square-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 square-retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit"}
+
+[plugins]
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
