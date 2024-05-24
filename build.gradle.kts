@@ -25,6 +25,7 @@ plugins {
     id("com.squareup.sort-dependencies").version(libs.versions.sortDependencies).apply(false)
     id("io.gitlab.arturbosch.detekt").version(libs.versions.detektGradlePlugin)
     id("org.jmailen.kotlinter").version(libs.versions.kotlinter).apply(false)
+    alias(libs.plugins.compose.compiler).apply(false)
 }
 
 apply(from = "buildscripts/githooks.gradle")

@@ -6,6 +6,7 @@ plugins {
     id("com.squareup.sort-dependencies")
     id("kotlin-android")
     id("org.jmailen.kotlinter")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -38,14 +39,6 @@ android {
 
     kotlinOptions {
         jvmTarget = "17"
-    }
-
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     packaging {
