@@ -3,9 +3,7 @@ plugins {
     id("com.android.application")
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
-    id("com.squareup.sort-dependencies")
     id("kotlin-android")
-    id("org.jmailen.kotlinter")
     alias(libs.plugins.compose.compiler)
 }
 
