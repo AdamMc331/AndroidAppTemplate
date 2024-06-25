@@ -89,3 +89,11 @@ dependencies {
     androidTestImplementation(libs.compose.ui.test.junit)
     androidTestImplementation(libs.hilt.android.testing)
 }
+
+tasks.formatKotlinMain {
+    exclude { it.file.path.contains("build/")}
+}
+
+tasks.lintKotlinMain {
+    exclude { it.file.path.contains("build/")}
+}
