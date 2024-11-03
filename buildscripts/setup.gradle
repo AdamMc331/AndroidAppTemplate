@@ -233,6 +233,9 @@ task keepOrRemoveDependencies {
             if (renameConfig.usePaparazziDependencies != true) {
                 println("Removing paparazzi dependencies")
                 removeTextFromFile(fileName, "paparazzi")
+
+                def testHelper = "${rootDir}/app/src/test/java/${renameConfig.templateName}/BasePaparazziTest.kt"
+                delete(testHelper)
             }
         }
     }
