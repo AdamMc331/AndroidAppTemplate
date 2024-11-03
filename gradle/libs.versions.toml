@@ -2,7 +2,8 @@
 activityCompose = "1.9.3"
 androidxTest = "1.2.1"
 appCompat = "1.7.0"
-compileSdk = "34"
+coil = "3.0.0-rc02"
+compileSdk = "35"
 composeBom = "2024.10.01"
 detektGradlePlugin = "1.23.7"
 espresso = "3.6.1"
@@ -13,7 +14,7 @@ junit = "4.13.2"
 kotlin = "2.0.21"
 kotlinter = "4.4.1"
 ksp = "2.0.20-1.0.25"
-ktxCore = "1.13.1"
+ktxCore = "1.15.0"
 leakCanary = "2.14"
 lifecycle = "2.8.7"
 material = "1.12.0"
@@ -35,6 +36,8 @@ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref =
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidxTest" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 compose-material = { group = "androidx.compose.material3", name = "material3" }
