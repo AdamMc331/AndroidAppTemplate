@@ -37,13 +37,73 @@ task deleteSetupCode() {
     }
 }
 
-task renameAppPackage(type: Copy) {
-    description "Renames the template package in the app module."
+task renameAppMainPackage(type: Copy) {
+    description "Renames the template package in the app/src/main module."
     group null
 
     def newPackageAsDirectory = renameConfig.newPackage.replaceAll("\\.", "/")
     def startingDirectory = "${rootDir}/app/src/main/java/${renameConfig.templateName}"
     def endingDirectory = "${rootDir}/app/src/main/java/${newPackageAsDirectory}"
+
+    from(startingDirectory)
+    into(endingDirectory)
+
+    // Replace package statements
+    filter { line ->
+        line.replaceAll(
+                "package ${renameConfig.templateName}",
+                "package ${renameConfig.newPackage}"
+        )
+    }
+
+    // Replace import statements
+    filter { line ->
+        line.replaceAll(
+                "import ${renameConfig.templateName}",
+                "import ${renameConfig.newPackage}"
+        )
+    }
+
+    // Replace Theme references. We can just replace on name,
+    // which covers both imports and function calls.
+    filter { line ->
+        line.replaceAll(
+                "${renameConfig.templateMaterialThemeName}",
+                "${renameConfig.newMaterialThemeName}"
+        )
+    }
+
+    // Replace application class references
+    filter { line ->
+        line.replaceAll(
+                "${renameConfig.templateApplicationClassName}",
+                "${renameConfig.newApplicationClassName}",
+        )
+    }
+
+    rename { fileName ->
+        if (fileName.contains("${renameConfig.templateApplicationClassName}")) {
+            fileName.replace(
+                    "${renameConfig.templateApplicationClassName}",
+                    "${renameConfig.newApplicationClassName}",
+            )
+        } else {
+            fileName
+        }
+    }
+
+    doLast {
+        delete(startingDirectory)
+    }
+}
+
+task renameAppTestPackage(type: Copy) {
+    description "Renames the template package in the app/src/test module."
+    group null
+
+    def newPackageAsDirectory = renameConfig.newPackage.replaceAll("\\.", "/")
+    def startingDirectory = "${rootDir}/app/src/test/java/${renameConfig.templateName}"
+    def endingDirectory = "${rootDir}/app/src/test/java/${newPackageAsDirectory}"
 
     from(startingDirectory)
     into(endingDirectory)
@@ -184,7 +244,8 @@ task renameTemplate {
 
     dependsOn(
             keepOrRemoveDependencies,
-            renameAppPackage,
+            renameAppMainPackage,
+            renameAppTestPackage,
             replaceTemplateReferences,
             deleteSetupCode,
     )
