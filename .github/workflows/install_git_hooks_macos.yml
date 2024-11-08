@@ -3,6 +3,12 @@
 
 name: Install MacOS Hooks
 
+# This will cancel any in progress workflows for the same PR, if
+# multiple pushes happen in quick succession.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 on: pull_request
 
 jobs:
