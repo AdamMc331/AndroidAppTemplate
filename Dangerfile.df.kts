@@ -19,7 +19,9 @@ danger(args) {
             warn("Please consider breaking up this pull request.")
         }
 
-        // TODO: Find out if we can look up labels
+        if (issue.labels.isEmpty()) {
+            warn("Please add labels to this PR.")
+        }
 
         if (deletions > additions) {
             message("🎉 Code Cleanup!")
