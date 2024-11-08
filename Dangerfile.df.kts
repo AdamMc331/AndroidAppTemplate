@@ -2,6 +2,7 @@
 
 // Editing this file: https://github.com/danger/kotlin?tab=readme-ov-file#autocomplete-and-syntax-highlighting-in-intellij-idea-or-android-studio
 import systems.danger.kotlin.*
+import java.io.File
 
 danger(args) {
 
@@ -27,6 +28,16 @@ danger(args) {
             message("🎉 Code Cleanup!")
         }
 
-        // TODO: Copy over old code for dependency update printing
+        val updatesFile = File("build/dependencyUpdates/report.txt")
+        val lines = updatesFile.readLines()
+
+        val headerIndex = lines.indexOfFirst { line ->
+            line.contains("The following dependencies have later milestone versions:")
+        }
+
+        if (headerIndex >= 0) {
+            val message = lines.subList(headerIndex, lines.size).joinToString("\n")
+            message(message)
+        }
     }
 }
