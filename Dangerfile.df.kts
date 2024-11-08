@@ -1,4 +1,4 @@
-@file:Suppress("MagicNumber, WildcardImport")
+@file:Suppress("MagicNumber", "WildcardImport")
 // Editing this file: https://github.com/marketplace/actions/danger-kotlin#autocomplete-and-syntax-highlighting-in-intellij-idea-or-android-studio
 import systems.danger.kotlin.*
 
