@@ -12,7 +12,7 @@ danger(args) {
 
         // Changelog
         if (!isTrivial && !changelogChanged && sourceChanges != null) {
-            warn(WordUtils.capitalize("any changes to library code should be reflected in the Changelog.\n\nPlease consider adding a note there and adhere to the [Changelog Guidelines](https://github.com/Moya/contributors/blob/master/Changelog%20Guidelines.md)."))
+            warn("any changes to library code should be reflected in the Changelog.\n\nPlease consider adding a note there and adhere to the [Changelog Guidelines](https://github.com/Moya/contributors/blob/master/Changelog%20Guidelines.md).")
         }
 
         // Big PR Check
