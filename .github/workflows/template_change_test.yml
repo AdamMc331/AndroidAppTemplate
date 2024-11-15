@@ -45,7 +45,9 @@ jobs:
         uses: gradle/gradle-build-action@v3
 
       - name: Rename
-        run: ./gradlew renameTemplate formatKotlin
+        run: |
+            ./gradlew renameTemplate 
+            ./gradlew formatKotlin
 
       - name: Build
         run: ./gradlew build
