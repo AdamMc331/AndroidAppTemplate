@@ -178,7 +178,7 @@ task keepOrRemoveDependencies {
     }
 }
 
-task renameTemplate {
+task renameTemplateSteps {
     description "Runs all of the necessary template setup tasks based on the renameConfig."
     group "Template Setup"
 
@@ -196,6 +196,16 @@ task renameTemplate {
             commandLine "git", "add", "${rootDir}/."
         }
     }
+}
+
+task renameTemplate(type: GradleBuild) {
+    description "Renames the template project."
+    group "Template Setup"
+
+    tasks = [
+            'renameTemplateSteps',
+            'app:formatKotlin',
+    ]
 }
 
 /**
