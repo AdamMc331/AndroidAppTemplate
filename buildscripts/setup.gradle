@@ -203,3 +203,9 @@ static def deleteSetupCode(rootDir, renameConfig) {
         delete(renovateFile)
     }
 }
+
+project('app').tasks.named {
+    it == "formatKotlin"
+}.configureEach {
+    dependsOn(rootProject.tasks.named("renameTemplate"))
+}
