@@ -14,7 +14,7 @@ def renameConfig = [
         useRenovateDependencies     : true,
 ]
 
-task renameTemplate {
+task renameTemplate(type: Copy) {
     description "Runs all of the necessary template setup tasks based on the renameConfig."
     group "Template Setup"
 
