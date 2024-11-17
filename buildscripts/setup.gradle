@@ -3,7 +3,7 @@ def renameConfig = [
         templateAppId               : "template.app.id",
         templateMaterialThemeName   : "TemplateTheme",
         templateApplicationClassName: "TemplateApp",
-        newPackage                  : "domain.yourname.app",
+        newPackage                  : "aaa.yourname.app",
         newProjectName              : "Your Project",
         newMaterialThemeName        : "MyMaterialTheme",
         newApplicationClassName     : "MyApp",
