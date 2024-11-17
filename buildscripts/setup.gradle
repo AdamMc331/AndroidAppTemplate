@@ -189,6 +189,8 @@ task renameTemplate(type: GradleBuild) {
             'deleteSetupCode',
     ]
 
+    finalizedBy("app:formatKotlin")
+
     doLast {
         exec {
             // After all setup changes happen, run a `git add` so
