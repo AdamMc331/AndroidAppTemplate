@@ -35,6 +35,8 @@ task deleteSetupCode() {
             delete(renovateFile)
         }
     }
+
+    mustRunAfter("replaceTemplateReferences")
 }
 
 task renameAppPackage(type: Copy) {
@@ -96,9 +98,7 @@ task renameAppPackage(type: Copy) {
         delete(startingDirectory)
     }
 
-    finalizedBy(
-            "replaceTemplateReferences"
-    )
+    mustRunAfter("keepOrRemoveDependencies")
 }
 
 task replaceTemplateReferences {
@@ -142,6 +142,8 @@ task replaceTemplateReferences {
                 "<string name=\"app_name\">${renameConfig.newProjectName}</string>",
         )
     }
+
+    mustRunAfter("renameAppPackage")
 }
 
 task keepOrRemoveDependencies {
@@ -180,18 +182,17 @@ task keepOrRemoveDependencies {
             }
         }
     }
-
-    finalizedBy(
-            "renameAppPackage",
-    )
 }
 
-task renameTemplateSteps {
+task renameTemplate {
     description "Runs all of the necessary template setup tasks based on the renameConfig."
     group "Template Setup"
 
     dependsOn(
             keepOrRemoveDependencies,
+            renameAppPackage,
+            replaceTemplateReferences,
+            deleteSetupCode,
     )
 
     finalizedBy(
@@ -205,16 +206,6 @@ task renameTemplateSteps {
             commandLine "git", "add", "${rootDir}/."
         }
     }
-}
-
-task renameTemplate(type: GradleBuild) {
-    description "Renames the template project."
-    group "Template Setup"
-
-    tasks = [
-            'renameTemplateSteps',
-            'app:formatKotlin',
-    ]
 }
 
 /**
