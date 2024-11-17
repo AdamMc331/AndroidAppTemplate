@@ -54,5 +54,8 @@ jobs:
       - name: Rename
         run: ./gradlew renameTemplate
 
+      - name: Lint Checks
+        run: ./gradlew detektAll lintKotlin lint
+
       - name: Build
-        run: ./gradlew build
+        run: ./gradlew assembleDebug
