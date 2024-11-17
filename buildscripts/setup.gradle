@@ -178,16 +178,23 @@ task keepOrRemoveDependencies {
     }
 }
 
-task renameTemplate(type: GradleBuild) {
+tasks.named('renameAppPackage').configure {
+    it.dependsOn('keepOrRemoveDependencies')
+}
+
+tasks.named('replaceTemplateReferences').configure {
+    it.dependsOn('renameAppPackage')
+}
+
+tasks.named('deleteSetupCode').configure {
+    it.dependsOn('replaceTemplateReferences')
+}
+
+task renameTemplate {
     description "Runs all of the necessary template setup tasks based on the renameConfig."
     group "Template Setup"
 
-    tasks = [
-            'keepOrRemoveDependencies',
-            'renameAppPackage',
-            'replaceTemplateReferences',
-            'deleteSetupCode',
-    ]
+    dependsOn('deleteSetupCode')
 
     finalizedBy("app:formatKotlin")
 
