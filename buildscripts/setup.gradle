@@ -179,7 +179,9 @@ task keepOrRemoveDependencies {
 }
 
 project('app').tasks.named {
-    it == "formatKotlin"
+    // startsWith is used because this applies to multiple tasks,
+    // like formatKotlinMain, formatKotlinTest, etc.
+    it.startsWith("formatKotlin")
 }.configureEach {
     dependsOn(rootProject.tasks.named("renameTemplate"))
 }
