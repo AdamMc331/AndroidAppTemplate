@@ -178,16 +178,20 @@ task keepOrRemoveDependencies {
     }
 }
 
-tasks.named('renameAppPackage').configure {
-    it.dependsOn('keepOrRemoveDependencies')
+tasks.named('renameAppPackage') {
+    dependsOn('keepOrRemoveDependencies')
 }
 
-tasks.named('replaceTemplateReferences').configure {
-    it.dependsOn('renameAppPackage')
+tasks.named('replaceTemplateReferences') {
+    dependsOn('renameAppPackage')
 }
 
-tasks.named('deleteSetupCode').configure {
-    it.dependsOn('replaceTemplateReferences')
+tasks.named('deleteSetupCode') {
+    dependsOn('replaceTemplateReferences')
+}
+
+tasks.named('formatKotlin') {
+    dependsOn('deleteSetupCode')
 }
 
 task renameTemplate {
