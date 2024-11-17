@@ -186,7 +186,11 @@ task renameTemplateSteps {
             keepOrRemoveDependencies,
             renameAppPackage,
             replaceTemplateReferences,
-            deleteSetupCode,
+//            deleteSetupCode,
+    )
+
+    finalizedBy(
+            "app:formatKotlin"
     )
 
     doLast {
