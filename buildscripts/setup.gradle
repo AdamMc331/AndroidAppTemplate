@@ -95,6 +95,10 @@ task renameAppPackage(type: Copy) {
     doLast {
         delete(startingDirectory)
     }
+
+    finalizedBy(
+            "replaceTemplateReferences"
+    )
 }
 
 task replaceTemplateReferences {
@@ -176,6 +180,10 @@ task keepOrRemoveDependencies {
             }
         }
     }
+
+    finalizedBy(
+            "renameAppPackage",
+    )
 }
 
 task renameTemplateSteps {
@@ -184,9 +192,6 @@ task renameTemplateSteps {
 
     dependsOn(
             keepOrRemoveDependencies,
-            renameAppPackage,
-            replaceTemplateReferences,
-//            deleteSetupCode,
     )
 
     finalizedBy(
