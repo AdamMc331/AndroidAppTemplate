@@ -70,13 +70,13 @@ task renameTemplate {
     }
 
     doFirst {
-        keepOrRemoveDependencies()
-        replaceTemplateReferences()
+        keepOrRemoveDependencies(renameConfig)
+        replaceTemplateReferences(renameConfig)
     }
 
     doLast {
         delete(startingDirectory)
-        deleteSetupCode()
+        deleteSetupCode(renameConfig)
 
         exec {
             // After all setup changes happen, run a `git add` so
@@ -112,7 +112,7 @@ static def removeTextFromFile(fileName, text) {
     }
 }
 
-static def keepOrRemoveDependencies() {
+static def keepOrRemoveDependencies(renameConfig) {
     def filesWithDependencies = [
             "${rootDir}/build.gradle.kts",
             "${rootDir}/app/build.gradle.kts",
@@ -145,7 +145,7 @@ static def keepOrRemoveDependencies() {
     }
 }
 
-static def replaceTemplateReferences() {
+static def replaceTemplateReferences(renameConfig) {
     replaceTextInFile(
             "${rootDir}/app/src/main/AndroidManifest.xml",
             "${renameConfig.templateName}.MainActivity",
@@ -183,7 +183,7 @@ static def replaceTemplateReferences() {
     )
 }
 
-static def deleteSetupCode() {
+static def deleteSetupCode(renameConfig) {
     def workflowsFolder = "${rootDir}/.github/workflows"
     def buildscriptsFolder = "${rootDir}/buildscripts"
     def templateChangeWorkflowFile = "$workflowsFolder/template_change_test.yml"
