@@ -35,8 +35,6 @@ task deleteSetupCode() {
             delete(renovateFile)
         }
     }
-
-    mustRunAfter("replaceTemplateReferences")
 }
 
 task renameAppPackage(type: Copy) {
@@ -97,8 +95,6 @@ task renameAppPackage(type: Copy) {
     doLast {
         delete(startingDirectory)
     }
-
-    mustRunAfter("keepOrRemoveDependencies")
 }
 
 task replaceTemplateReferences {
@@ -142,8 +138,6 @@ task replaceTemplateReferences {
                 "<string name=\"app_name\">${renameConfig.newProjectName}</string>",
         )
     }
-
-    mustRunAfter("renameAppPackage")
 }
 
 task keepOrRemoveDependencies {
@@ -184,20 +178,16 @@ task keepOrRemoveDependencies {
     }
 }
 
-task renameTemplate {
+task renameTemplate(type: GradleBuild) {
     description "Runs all of the necessary template setup tasks based on the renameConfig."
     group "Template Setup"
 
-    dependsOn(
-            keepOrRemoveDependencies,
-            renameAppPackage,
-            replaceTemplateReferences,
-            deleteSetupCode,
-    )
-
-    finalizedBy(
-            "app:formatKotlin"
-    )
+    tasks = [
+            'keepOrRemoveDependencies',
+            'renameAppPackage',
+            'replaceTemplateReferences',
+            'deleteSetupCode',
+    ]
 
     doLast {
         exec {
