@@ -183,7 +183,7 @@ project('app').tasks.named {
     // like formatKotlinMain, formatKotlinTest, etc.
     it.startsWith("formatKotlin")
 }.configureEach {
-    dependsOn(rootProject.tasks.named("renameTemplate"))
+    mustRunAfter(rootProject.tasks.named("renameTemplate"))
 }
 
 task renameTemplate {
