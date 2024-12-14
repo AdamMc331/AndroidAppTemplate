@@ -66,6 +66,6 @@ tasks {
         exclude("**/resources/**")
         exclude("**/build/**")
         config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
-        buildUponDefaultConfig = false
+        buildUponDefaultConfig = true
     }
 }
