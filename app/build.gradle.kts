@@ -1,10 +1,10 @@
 plugins {
-    id("app.cash.paparazzi")
-    id("com.android.application")
-    id("com.google.dagger.hilt.android")
-    id("com.google.devtools.ksp")
-    id("kotlin-android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.cash.paparazzi)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.google.dagger.hilt)
+    alias(libs.plugins.google.ksp)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -53,12 +53,6 @@ android {
 }
 
 dependencies {
-    ksp(libs.androidx.room.compiler)
-    ksp(libs.hilt.compiler)
-    ksp(libs.square.moshi.kotlin.codegen)
-
-    kspAndroidTest(libs.hilt.android.compiler)
-
     implementation(platform(libs.compose.bom))
     implementation(libs.android.material)
     implementation(libs.androidx.activity.compose)
@@ -91,6 +85,12 @@ dependencies {
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.compose.ui.test.junit)
     androidTestImplementation(libs.hilt.android.testing)
+
+    ksp(libs.androidx.room.compiler)
+    ksp(libs.hilt.compiler)
+    ksp(libs.square.moshi.kotlin.codegen)
+
+    kspAndroidTest(libs.hilt.android.compiler)
 }
 
 tasks.formatKotlinMain {

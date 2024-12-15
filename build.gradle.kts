@@ -1,31 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-
-    repositories {
-        google()
-        mavenCentral()
-        maven(url = "https://plugins.gradle.org/m2/")
-    }
-
-    dependencies {
-        classpath(libs.detekt.gradle.plugin)
-        classpath(libs.gradle)
-        classpath(libs.gradle.versions.plugin)
-        classpath(libs.kotlin.gradle.plugin)
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
 
 plugins {
-    id("app.cash.paparazzi").version(libs.versions.paparazzi).apply(false)
-    id("com.google.dagger.hilt.android").version(libs.versions.hilt).apply(false)
-    id("com.google.devtools.ksp").version(libs.versions.ksp).apply(false)
-    id("com.squareup.sort-dependencies").version(libs.versions.sortDependencies).apply(false)
-    id("io.gitlab.arturbosch.detekt").version(libs.versions.detektGradlePlugin)
-    id("org.jmailen.kotlinter").version(libs.versions.kotlinter).apply(false)
+    alias(libs.plugins.android.application).apply(false)
+    alias(libs.plugins.benmanes.versions).apply(false)
+    alias(libs.plugins.cash.paparazzi).apply(false)
     alias(libs.plugins.compose.compiler).apply(false)
+    alias(libs.plugins.detekt).apply(true) // Needs to be applied at the root, unlike others.
+    alias(libs.plugins.google.dagger.hilt).apply(false)
+    alias(libs.plugins.google.ksp).apply(false)
+    alias(libs.plugins.kotlin.android).apply(false)
+    alias(libs.plugins.kotlinter).apply(false)
+    alias(libs.plugins.square.sort.dependencies).apply(false)
 }
 
 apply(from = "buildscripts/githooks.gradle")
