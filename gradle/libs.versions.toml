@@ -23,7 +23,7 @@ moshi = "1.15.2"
 paparazzi = "1.3.5"
 retrofit = "2.11.0"
 room = "2.6.1"
-sortDependencies = "0.13"
+sortDependencies = "0.14"
 
 [libraries]
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
