@@ -9,5 +9,22 @@
       "automerge": true
     }
   ],
-  "platformAutomerge": true
+  "platformAutomerge": true,
+  "ignorePresets": [
+    "workarounds:javaLTSVersions"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.java-version$"
+      ],
+      "matchStrings": [
+        "(?<currentValue>.*)\\n"
+      ],
+      "datasourceTemplate": "java-version",
+      "depNameTemplate": "java",
+      "extractVersionTemplate": "^(?<version>\\d+)"
+    }
+  ]
 }
