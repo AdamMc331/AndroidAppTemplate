@@ -74,3 +74,6 @@ google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
 square-sort-dependencies = { id = "com.squareup.sort-dependencies", version.ref = "sortDependencies" }
+
+[bundles]
+androidx-xr = ["androidx-xr-compose", "androidx-xr-compose-material3", "androidx-xr-scenecore"]
