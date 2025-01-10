@@ -12,6 +12,7 @@ def renameConfig = [
         useRetrofitDependencies     : true,
         usePaparazziDependencies    : true,
         useRenovateDependencies     : true,
+        useAndroidXR                : false,
 ]
 
 task deleteSetupCode() {
@@ -147,8 +148,9 @@ task keepOrRemoveDependencies {
     doLast {
         def filesWithDependencies = [
                 "${rootDir}/build.gradle.kts",
-                "${rootDir}/app/build.gradle.kts",
                 "${rootDir}/gradle/libs.versions.toml",
+                "${rootDir}/app/build.gradle.kts",
+                "${rootDir}/app/src/main/AndroidManifest.xml",
                 "${rootDir}/app/src/main/java/template/TemplateApp.kt",
         ]
 
@@ -173,6 +175,11 @@ task keepOrRemoveDependencies {
             if (renameConfig.usePaparazziDependencies != true) {
                 println("Removing paparazzi dependencies")
                 removeTextFromFile(fileName, "paparazzi")
+            }
+
+            if (renameConfig.useAndroidXR != true) {
+                println("Removing xr dependencies")
+                removeTextFromFile(fileName, "xr")
             }
         }
     }

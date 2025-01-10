@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.bundles.androidx.xr)
     implementation(libs.coil.compose)
     implementation(libs.coil.okhttp)
     implementation(libs.compose.material)
