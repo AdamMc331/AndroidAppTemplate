@@ -21,7 +21,7 @@ task deleteSetupCode() {
     def macosHooksWorkflowFile = "$workflowsFolder/install_git_hooks_macos.yml"
     def windowsHooksWorkflowFile = "$workflowsFolder/install_git_hooks_windows.yml"
     def setupGradle = "$buildscriptsFolder/setup.gradle"
-    def renovateFile = "${rootDir}/renovate.json"
+    def renovateFile = "${rootDir}/renovate.json5"
 
     doLast {
         removeTextFromFile("${rootDir}/build.gradle.kts", "setup.gradle")
