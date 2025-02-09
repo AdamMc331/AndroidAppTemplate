@@ -15,14 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set Up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version-file: .github/.java-version
-
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
+      - name: Setup
+        uses: ./.github/actions/workflow_setup
 
       - name: Dependency Updates
         run: ./gradlew dependencyUpdates

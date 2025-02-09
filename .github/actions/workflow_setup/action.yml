@@ -1,0 +1,19 @@
+name: "Workflow Setup"
+
+description: "Common setup across multiple workflows."
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Set Up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version-file: .github/.java-version
+
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v3
+      with:
+        # Only write to the cache for builds on the 'development' branch
+        cache-read-only: ${{ github.ref != 'refs/heads/development' }}

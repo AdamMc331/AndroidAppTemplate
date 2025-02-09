@@ -22,6 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup
+        uses: ./.github/actions/workflow_setup
+
       - name: Set useHiltDependencies
         run: |
           sed -i '' 's/useHiltDependencies.* : true/useHiltDependencies : ${{ matrix.keepCustomizableDependencies }}/g' buildscripts/setup.gradle
@@ -45,15 +48,6 @@ jobs:
       - name: Set useAndroidXR
         run: |
           sed -i '' 's/useAndroidXR.* : false/useAndroidXR : ${{ matrix.keepCustomizableDependencies }}/g' buildscripts/setup.gradle
-
-      - name: Set Up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version-file: .github/.java-version
-
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
 
       - name: Rename
         run: ./gradlew renameTemplate
