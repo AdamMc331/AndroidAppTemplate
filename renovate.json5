@@ -33,6 +33,7 @@
       depNameTemplate: 'java',
       // Only write the major version.
       extractVersionTemplate: '^(?<version>\\d+)',
+      automerge: false,
     },
   ],
 }
