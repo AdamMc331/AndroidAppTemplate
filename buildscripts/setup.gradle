@@ -32,7 +32,6 @@ task deleteSetupCode() {
         delete(setupGradle)
 
         if (renameConfig.useRenovateDependencies != true) {
-            println("Removing renovate dependencies")
             delete(renovateFile)
         }
     }
@@ -156,29 +155,25 @@ task keepOrRemoveDependencies {
 
         filesWithDependencies.each { fileName ->
             if (renameConfig.useHiltDependencies != true) {
-                println("Removing hilt dependencies")
                 removeTextFromFile(fileName, "hilt")
                 removeTextFromFile(fileName, "Hilt")
             }
 
             if (renameConfig.useRoomDependencies != true) {
-                println("Removing room dependencies")
                 removeTextFromFile(fileName, "room")
             }
 
             if (renameConfig.useRetrofitDependencies != true) {
-                println("Removing retrofit dependencies")
                 removeTextFromFile(fileName, "retrofit")
                 removeTextFromFile(fileName, "moshi")
             }
 
             if (renameConfig.usePaparazziDependencies != true) {
-                println("Removing paparazzi dependencies")
                 removeTextFromFile(fileName, "paparazzi")
+                delete("${rootDir}/.github/workflows/paparazzi_tests.yml")
             }
 
             if (renameConfig.useAndroidXR != true) {
-                println("Removing xr dependencies")
                 removeTextFromFile(fileName, "xr")
             }
         }

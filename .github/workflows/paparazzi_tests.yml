@@ -1,0 +1,21 @@
+name: Paparazzi Tests
+
+# This will cancel any in progress workflows for the same PR, if
+# multiple pushes happen in quick succession.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+on: pull_request
+
+jobs:
+  paparazzi-tests:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/workflow_setup
+
+      - name: Run Tests
+        run: ./gradlew verifyPaparazziDebug
