@@ -2,6 +2,8 @@
 # want to override for our application. This is done by using `buildUponDefaultConfig` in the gradle
 # configuration.
 
+# You can find a list of rules in the Detekt docs: https://detekt.dev/docs/intro
+
 naming:
   active: true
   # Ignore function naming for Composable functions since they start with uppercase letters.
