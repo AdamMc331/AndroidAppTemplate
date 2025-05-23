@@ -170,6 +170,7 @@ task keepOrRemoveDependencies {
                 println("Removing retrofit dependencies")
                 removeTextFromFile(fileName, "retrofit")
                 removeTextFromFile(fileName, "moshi")
+                removeTextFromFile(fileName, "okhttp")
             }
 
             if (renameConfig.usePaparazziDependencies != true) {
