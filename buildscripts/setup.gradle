@@ -152,6 +152,7 @@ task keepOrRemoveDependencies {
                 "${rootDir}/app/build.gradle.kts",
                 "${rootDir}/app/src/main/AndroidManifest.xml",
                 "${rootDir}/app/src/main/java/template/TemplateApp.kt",
+                "${rootDir}/app/src/main/java/template/MainActivity.kt",
         ]
 
         filesWithDependencies.each { fileName ->
@@ -159,6 +160,7 @@ task keepOrRemoveDependencies {
                 println("Removing hilt dependencies")
                 removeTextFromFile(fileName, "hilt")
                 removeTextFromFile(fileName, "Hilt")
+                removeTextFromFile(fileName, "AndroidEntryPoint")
             }
 
             if (renameConfig.useRoomDependencies != true) {
