@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
     implementation(libs.square.moshi.kotlin)
     implementation(libs.square.okhttp.logging.interceptor)
     implementation(libs.square.retrofit)
