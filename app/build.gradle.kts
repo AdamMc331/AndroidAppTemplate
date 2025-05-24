@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.coil.okhttp)
     implementation(libs.compose.material)
     implementation(libs.compose.material.icons.extended)
+    implementation(libs.compose.navigation)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
     implementation(libs.hilt.android)
