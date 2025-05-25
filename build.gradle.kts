@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.google.dagger.hilt).apply(false)
     alias(libs.plugins.google.ksp).apply(false)
     alias(libs.plugins.kotlin.android).apply(false)
+    alias(libs.plugins.kotlin.parcelize).apply(false)
     alias(libs.plugins.kotlinter).apply(false)
     alias(libs.plugins.square.sort.dependencies).apply(false)
 }
