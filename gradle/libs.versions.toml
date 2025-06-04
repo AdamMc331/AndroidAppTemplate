@@ -2,7 +2,7 @@
 activityCompose = "1.10.1"
 agp = "8.10.1"
 androidxTest = "1.2.1"
-appCompat = "1.7.0"
+appCompat = "1.7.1"
 coil = "3.2.0"
 compileSdk = "35"
 composeBom = "2025.05.01"
