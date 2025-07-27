@@ -22,6 +22,14 @@ subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
     apply(plugin = "com.squareup.sort-dependencies")
     apply(plugin = "org.jmailen.kotlinter")
+
+    tasks.withType<FormatTask> {
+        exclude { it.file.path.contains("build/") }
+    }
+
+    tasks.withType<LintTask> {
+        exclude { it.file.path.contains("build/") }
+    }
 }
 
 tasks.register("clean", Delete::class) {
