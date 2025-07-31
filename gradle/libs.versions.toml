@@ -27,7 +27,7 @@ paparazzi = "1.3.5"
 retrofit = "3.0.0"
 room = "2.7.2"
 sortDependencies = "0.14"
-xr = "1.0.0-alpha04"
+xr = "1.0.0-alpha05"
 xr-material = "1.0.0-alpha10"
 
 [libraries]
