@@ -18,7 +18,23 @@ task copyPreCommitHook(type: Copy) {
     from new File(rootProject.rootDir, "git-hooks/pre-commit-${suffix}.sh")
     into { new File(rootProject.rootDir, '.git/hooks') }
     rename("pre-commit-${suffix}.sh", 'pre-commit')
-    fileMode 0775
+    filePermissions {
+        user {
+            read = true
+            write = true
+            execute = true
+        }
+        group {
+            read = true
+            write = true
+            execute = true
+        }
+        other {
+            read = true
+            write = false
+            execute = true
+        }
+    }
 }
 
 task copyPrePushHook(type: Copy) {
@@ -29,7 +45,23 @@ task copyPrePushHook(type: Copy) {
     from new File(rootProject.rootDir, "git-hooks/pre-push-${suffix}.sh")
     into { new File(rootProject.rootDir, '.git/hooks') }
     rename("pre-push-${suffix}.sh", 'pre-push')
-    fileMode 0775
+    filePermissions {
+        user {
+            read = true
+            write = true
+            execute = true
+        }
+        group {
+            read = true
+            write = true
+            execute = true
+        }
+        other {
+            read = true
+            write = false
+            execute = true
+        }
+    }
 }
 
 task copyGitHooks(type: Copy) {
