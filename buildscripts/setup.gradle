@@ -15,7 +15,7 @@ def renameConfig = [
         useAndroidXR                : false,
 ]
 
-task deleteSetupCode() {
+tasks.register('deleteSetupCode') {
     def workflowsFolder = "${rootDir}/.github/workflows"
     def buildscriptsFolder = "${rootDir}/buildscripts"
     def templateChangeWorkflowFile = "$workflowsFolder/template_change_test.yml"
@@ -38,7 +38,7 @@ task deleteSetupCode() {
     }
 }
 
-task renameAppPackage(type: Copy) {
+tasks.register('renameAppPackage', Copy) {
     description "Renames the template package in the app module."
     group null
 
@@ -98,7 +98,7 @@ task renameAppPackage(type: Copy) {
     }
 }
 
-task replaceTemplateReferences {
+tasks.register('replaceTemplateReferences') {
     description "Replaces references to template in various files."
     group null
 
@@ -141,7 +141,7 @@ task replaceTemplateReferences {
     }
 }
 
-task keepOrRemoveDependencies {
+tasks.register('keepOrRemoveDependencies') {
     description "Keeps or removes certain dependencies defined in renameConfig."
     group null
 
@@ -196,7 +196,7 @@ project('app').tasks.named {
     mustRunAfter(rootProject.tasks.named("renameTemplate"))
 }
 
-task renameTemplate {
+tasks.register('renameTemplate') {
     description "Runs all of the necessary template setup tasks based on the renameConfig."
     group "Template Setup"
 
@@ -210,10 +210,13 @@ task renameTemplate {
     finalizedBy("app:formatKotlin")
 
     doLast {
-        exec {
+        def execOps = services.get(ExecOperations.class)
+
+        execOps.exec {
+            workingDir rootDir
             // After all setup changes happen, run a `git add` so
             // folks can just immediately commit and push if they wish.
-            commandLine "git", "add", "${rootDir}/."
+            commandLine "git", "add", "." // Using relative path "." as workingDir is set
         }
     }
 }
