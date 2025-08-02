@@ -10,7 +10,7 @@ static def osSuffix() {
     return suffix
 }
 
-task copyPreCommitHook(type: Copy) {
+tasks.register('copyPreCommitHook', Copy) {
     group 'git hooks'
 
     def suffix = osSuffix()
@@ -37,7 +37,7 @@ task copyPreCommitHook(type: Copy) {
     }
 }
 
-task copyPrePushHook(type: Copy) {
+tasks.register('copyPrePushHook', Copy) {
     group 'git hooks'
 
     def suffix = osSuffix()
@@ -64,7 +64,7 @@ task copyPrePushHook(type: Copy) {
     }
 }
 
-task copyGitHooks(type: Copy) {
+tasks.register('copyGitHooks', Copy) {
     description 'Copies the git hooks from /git-hooks to the .git folder.'
     group 'git hooks'
 
@@ -72,7 +72,7 @@ task copyGitHooks(type: Copy) {
     dependsOn copyPrePushHook
 }
 
-task installGitHooks(type: Exec) {
+tasks.register('installGitHooks', Exec) {
     description 'Installs the pre-commit git hooks from /git-hooks.'
     group 'git hooks'
     workingDir rootDir
