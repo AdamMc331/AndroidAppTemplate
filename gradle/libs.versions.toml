@@ -26,7 +26,7 @@ okhttp = "5.1.0"
 paparazzi = "1.3.5"
 retrofit = "3.0.0"
 room = "2.8.1"
-xr = "1.0.0-alpha06"
+xr = "1.0.0-alpha07"
 xr-material = "1.0.0-alpha11"
 
 [libraries]
