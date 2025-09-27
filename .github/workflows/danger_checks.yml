@@ -19,7 +19,7 @@ jobs:
         uses: ./.github/actions/workflow_setup
 
       - name: Dependency Updates
-        run: ./gradlew dependencyUpdates
+        run: ./gradlew dependencyUpdates --no-parallel
 
       - name: Danger Checks
         uses: danger/kotlin@1.3.3
