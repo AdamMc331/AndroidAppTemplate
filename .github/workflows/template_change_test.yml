@@ -20,7 +20,7 @@ jobs:
 
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Setup
         uses: ./.github/actions/workflow_setup

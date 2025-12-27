@@ -15,7 +15,7 @@ jobs:
   install-windows-hooks:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Setup
         uses: ./.github/actions/workflow_setup
