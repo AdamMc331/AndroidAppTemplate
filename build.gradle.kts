@@ -5,7 +5,6 @@ import org.jmailen.gradle.kotlinter.tasks.LintTask
 
 plugins {
     alias(libs.plugins.android.application).apply(false)
-    alias(libs.plugins.benmanes.versions).apply(false)
     alias(libs.plugins.cash.paparazzi).apply(false)
     alias(libs.plugins.compose.compiler).apply(false)
     alias(libs.plugins.detekt).apply(true) // Needs to be applied at the root, unlike others.

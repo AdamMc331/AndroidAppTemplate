@@ -71,7 +71,6 @@ square-retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-m
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-benmanes-versions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersionsPlugin" }
 cash-paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detektGradlePlugin" }
