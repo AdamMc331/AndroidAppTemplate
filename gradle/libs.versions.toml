@@ -1,6 +1,6 @@
 [versions]
 activityCompose = "1.12.4"
-agp = "9.0.0"
+agp = "9.0.1"
 androidxTest = "1.3.0"
 appCompat = "1.7.1"
 coil = "3.3.0"
