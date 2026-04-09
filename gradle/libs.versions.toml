@@ -19,15 +19,15 @@ ktxCore = "1.18.0"
 leakCanary = "2.14"
 lifecycle = "2.10.0"
 material = "1.13.0"
-minSdk = "23"
+minSdk = "24"
 moshi = "1.15.2"
 navigationCompose = "2.9.7"
 okhttp = "5.3.2"
 paparazzi = "2.0.0-alpha04"
 retrofit = "3.0.0"
 room = "2.8.4"
-xr = "1.0.0-alpha07"
-xr-material = "1.0.0-alpha11"
+xr = "1.0.0-alpha12"
+xr-material = "1.0.0-alpha16"
 
 [libraries]
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
