@@ -27,7 +27,7 @@ paparazzi = "2.0.0-alpha04"
 retrofit = "3.0.0"
 room = "2.8.4"
 xr = "1.0.0-alpha13"
-xr-material = "1.0.0-alpha16"
+xr-material = "1.0.0-alpha17"
 
 [libraries]
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
