@@ -94,6 +94,7 @@ dependencies {
 
     ksp(libs.androidx.room.compiler)
     ksp(libs.hilt.compiler)
+    ksp(libs.kotlin.metadata.jvm)
     ksp(libs.square.moshi.kotlin.codegen)
 
     kspAndroidTest(libs.hilt.android.compiler)
