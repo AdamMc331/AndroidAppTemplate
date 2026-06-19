@@ -161,6 +161,11 @@ tasks.register('keepOrRemoveDependencies') {
                 removeTextFromFile(fileName, "hilt")
                 removeTextFromFile(fileName, "Hilt")
                 removeTextFromFile(fileName, "AndroidEntryPoint")
+                // This dependency was added for hilt dependency conflicts when
+                // bumping kotlin to 2.4.0, so if we're not using hilt, we don't need
+                // to keep this around.
+                removeTextFromFile(fileName, "kotlin.metadata")
+                removeTextFromFile(fileName, "kotlin-metadata")
             }
 
             if (renameConfig.useRoomDependencies != true) {
