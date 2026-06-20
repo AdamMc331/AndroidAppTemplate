@@ -15,7 +15,7 @@ jobs:
   install-macos-hooks:
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Setup
         uses: ./.github/actions/workflow_setup
